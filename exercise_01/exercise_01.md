@@ -103,6 +103,14 @@ In order to pass this exercise, you must fulfill the following requirements:
   this is just one way to keep the repositories clean and easy to understand.
 
 
+## Submitting the solution
+
+We will grade the last commit you publish using `git push origin master` 
+before the deadline. To check if you have successfully uploaded your latest 
+solution, simply ask your colleague to pull the repository using `git pull 
+origin master` and see if the correct version of your code appears in his IDE.
+
+
 ## Deadline
 
 Submit your solutions by pushing your code to the git repository by
