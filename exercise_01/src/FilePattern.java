@@ -8,10 +8,16 @@
  * '*.md' matches all files with the markdown extension.
  * 'exercise_??.md' matches, for example, 'exercise_01.md'.
  * 
- * @author You!
+ * @author Samuel Schwegler, Alain Stulz
  *
  */
+
+import java.lang.*;
+
 public class FilePattern {
+
+	private String pattern;
+
 	/**
 	 * Creates a new instance of the FilePattern class that filters
 	 * file names based on the given pattern.
@@ -20,7 +26,7 @@ public class FilePattern {
 	 * @see FilePattern
 	 */
 	public FilePattern(String pattern) {
-		// your implementation
+		this.pattern = pattern;
 	}
 
 	/**
@@ -29,7 +35,31 @@ public class FilePattern {
 	 * @return true if filename matches the pattern
 	 */
 	public boolean matches(String filename) {
-		throw new NotImplementedException();
+		// Base case
+		if (filename.length() == 0 || pattern.length() == 0) {
+			return (filename.length() == 0 && pattern.length() == 0) || pattern.equals("*");
+		}
+
+		// Recursively match filename
+		if (pattern.charAt(0) == '?') {
+			// Compare next characters
+			return new FilePattern(pattern.substring(1)).matches(filename.substring(1));
+		} else if (pattern.charAt(0)== '*') {
+			if (pattern.length() == 1) {
+				return true;
+			}
+
+			// Check if any characters match after the asterisk
+			boolean hasMatchAfterAsterisk = false;
+			int i = 0;
+			while (!hasMatchAfterAsterisk && i < filename.length()) {
+				hasMatchAfterAsterisk = pattern.charAt(1)== filename.charAt(i);
+				i++;
+			}
+
+			return hasMatchAfterAsterisk && new FilePattern(pattern.substring(1)).matches(filename.substring(i-1));
+		} else {
+			return (pattern.charAt(0) == filename.charAt(0)) && new FilePattern(pattern.substring(1)).matches(filename.substring(1));
+		}
 	}
-    
 }
