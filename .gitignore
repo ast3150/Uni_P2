@@ -9,6 +9,10 @@
 .settings/
 .metadata
 
+# IntelliJ
+out/
+.idea/
+
 /**/RemoteSystemsTempFiles
 
 # Hidden files
@@ -27,6 +31,6 @@
 
 # OS specifc files
 Thumbs.db
-Desktrop.ini
+Desktop.ini
 .DS_Store
 .directory
