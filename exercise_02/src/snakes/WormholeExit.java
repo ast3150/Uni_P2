@@ -6,4 +6,8 @@ public class WormholeExit extends Square {
 		super(game, position);
 	}
 
+	@Override
+	protected String squareLabel() {
+		return position + "~|-|~";
+	}
 }
