@@ -11,8 +11,9 @@ public class Game {
 	private Queue<Player> players;
 	private Player winner;
 	private Die die;
+    private int position;
 
-	private boolean invariant() {
+    private boolean invariant() {
 		return squares.size() > 3
 				&& size == squares.size()
 				&& players.size() > 1;
@@ -36,7 +37,12 @@ public class Game {
 		game.setSquareToLadder(2, 4);
 		game.setSquareToLadder(6, 2);
 		game.setSquareToSnake(11, -6);
+		//Neu von Samuel
+        game.setSquareToWormhole(6);
+		game.setSquareToWormholeExit(2);
+		game.setSquareToWormholeExit(12);
 		game.setSquare(3, new SlowDownSquare(game, 3));
+		game.wormholeExits();
 		game.play();
 	}
 
@@ -132,6 +138,17 @@ public class Game {
 
 	public void setSquareToSnake(int position, int transport) {
 		this.setSquare(position, new Snake(transport, this, position));
+	}
+
+	//Neuer Teil von Samuel
+    public void setSquareToWormhole(int position)
+	{
+        this.setSquare(position, new WormholeEntrance(this, position));
+    }
+
+	public void setSquareToWormholeExit(int position)
+	{
+		this.setSquare(position, new WormholeExit(this, position));
 	}
 
 	public ISquare findSquare(int position, int moves) {
