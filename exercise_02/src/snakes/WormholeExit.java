@@ -10,4 +10,9 @@ public class WormholeExit extends Square {
 	protected String squareLabel() {
 		return position + "~|-|~";
 	}
+
+	@Override
+	public boolean isWormholeExit() {
+		return true;
+	}
 }
