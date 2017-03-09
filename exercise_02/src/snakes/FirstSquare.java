@@ -1,5 +1,22 @@
 package snakes;
 
+
+/*
+ * this is the firtsSquare class
+ * the methods are inherited from Square and overridden to specify this sub-class
+ * here starts the game
+ *
+ * @author Samuel Schwegler 16-119-695
+ * @author Alain Stulz
+ *
+ * @param players						represents the list of players
+ * @param position						int value of actual position
+ *
+ * @see Square							The mother-class
+ * @see isOccupied						This field cant be occupied because its the start
+ */
+
+
 import java.util.ArrayList;
 import java.util.List;
 
