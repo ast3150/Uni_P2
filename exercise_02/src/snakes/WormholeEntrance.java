@@ -8,19 +8,9 @@ public class WormholeEntrance extends Square {
     Random randomGenerator = new Random();
 
     public WormholeEntrance(Game game, int position)
-<<<<<<< HEAD
     {
         super(game, position);
-=======
-	{
-		super(game, position);
 	}
-
-    @Override
-    protected String squareLabel() {
-        return position + " (Entrance)";
->>>>>>> 70e89d081ad9f99192406aeac6189ff9c73e3c21
-    }
 
     int exit_rand = randomGenerator.nextInt(game.wormholeExits().size()+1);
 
