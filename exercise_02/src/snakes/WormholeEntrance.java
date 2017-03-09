@@ -21,6 +21,6 @@ public class WormholeEntrance extends Square {
 
     @Override
     protected String squareLabel() {
-        return position + "~|O|~";
+        return position + " (Entrance)";
     }
 }
