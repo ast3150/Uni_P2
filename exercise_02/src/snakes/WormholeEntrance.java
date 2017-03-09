@@ -14,11 +14,9 @@ public class WormholeEntrance extends Square {
 		super(game, position);
 	}
 
-	game.exits
-
     @Override
     protected String squareLabel() {
-        return position + "~|O|~" + exit;
+        return position + " (Entrance)";
     }
 
     @Override
