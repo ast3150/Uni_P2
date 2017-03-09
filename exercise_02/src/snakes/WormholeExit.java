@@ -8,7 +8,7 @@ public class WormholeExit extends Square {
 
 	@Override
 	protected String squareLabel() {
-		return position + "~|-|~";
+		return position + " (Exit)";
 	}
 
 	@Override

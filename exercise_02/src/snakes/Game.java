@@ -38,12 +38,16 @@ public class Game {
 		game.setSquareToLadder(6, 2);
 		game.setSquareToSnake(11, -6);
 		//Neu von Samuel
-        game.setSquareToWormhole(6);
-		game.setSquareToWormholeExit(2);
-		game.setSquareToWormholeExit(12);
-		game.setSquare(3, new SlowDownSquare(game, 3));
+        game.setSquareToWormhole(4);
+		game.setSquareToWormholeExit(7);
+		game.setSquareToWormholeExit(10);
+		game.setSquare(12, new SlowDownSquare(game, 12));
+		game.setSquare(3, new SpeedUpSquare(game, 3));
+		game.setSquare(5, new RollAgainSquare(game, 5));
+		game.setSquare(14, new RollBackSquare(game, 14));
 		game.wormholeExits();
 		game.play();
+		//1<Jack><Jill>][2->6][3 (SpeedUp)][4 (Entrance)][5][6->8][7 (Exit)][8][9][10 (Exit)][5<-11][12 (SlowDown)][13][14 (RollBack)][15]
 	}
 
 	public void play() {
