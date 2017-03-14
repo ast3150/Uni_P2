@@ -4,6 +4,10 @@ public class BoardMaker {
 	private boolean[][] board;
 	private final static int SIZE = 100;
 
+	public static void main(String[] args) {
+		CommandParser p = new CommandParser();
+		System.out.println("nom");
+	}
 	/**
 	 * Parse the given turtle program and evaluate it. Render the trail as
 	 * described in the problem description and return a SIZExSIZE board
@@ -13,7 +17,7 @@ public class BoardMaker {
 	 * @return SIZExSIZE boolean board, where true values denote "red trail".
 	 */
 	public boolean[][] makeBoardFrom(String turtleProgram) throws ParserException {
-
+		//Command[] c = {NorthCommand};
 		// TODO: Read text below!
 		// You should handle parsing of the program in a different class.
 		// That class should create and store individual programs, which
