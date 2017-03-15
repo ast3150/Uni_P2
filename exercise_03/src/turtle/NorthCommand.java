@@ -12,9 +12,7 @@ public class NorthCommand extends Command {
     private int distance = 0;
 
     public boolean canHandle(String instruction) {
-        //Test
-        return (instruction.equals("north [0-9]{2}"));
-        //throw new NotImplementedException();
+        return (instruction.matches("north [0-9]{2}"));
     }
 
     @Override
@@ -27,8 +25,13 @@ public class NorthCommand extends Command {
 
     @Override
     public boolean[][] execute(boolean[][] board, int lastRow, int lastColumn) {
-        //Test
-        board[3][3] = true;
+        assert lastRow < board.length;
+        assert lastColumn <= board[0].length;
+
+        for (int i = lastRow; i >= lastRow - distance && i >= 0; i--) {
+            board[i][lastColumn] = true;
+        }
+
         return board;
     }
 }
