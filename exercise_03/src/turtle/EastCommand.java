@@ -6,9 +6,9 @@ package turtle;
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414
  */
-public class SouthCommand extends Command implements ICommand {
+public class EastCommand  extends Command implements ICommand {
     public static boolean canHandle(String instruction) {
-        return (instruction.matches("south ([0-9])*"));
+        return (instruction.matches("east ([0-9])*"));
     }
 
     public void parseFromString(String instruction) {
@@ -23,14 +23,14 @@ public class SouthCommand extends Command implements ICommand {
         if (lastColumn >= board[lastRow].length) throw new ArrayIndexOutOfBoundsException();
         if (lastRow >= board.length) throw new ArrayIndexOutOfBoundsException();
 
-        for (int i = lastRow; i < lastRow + distance; i++) {
+        for (int i = lastColumn; i < lastColumn + distance; i++) {
             if (i < 0) throw new IndexOutOfBoundsException();
             if (i >= board.length) throw new IndexOutOfBoundsException();
 
-            board[lastColumn][i] = true;
+            board[i][lastRow] = true;
         }
 
-        this.lastRow = lastRow + distance;
+        this.lastColumn = lastColumn + distance;
 
         return board;
     }

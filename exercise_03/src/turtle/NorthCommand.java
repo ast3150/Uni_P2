@@ -33,7 +33,7 @@ public class NorthCommand extends Command implements ICommand {
             board[lastColumn][i] = true;
         }
 
-        lastRow = lastRow - distance;
+        this.lastRow = lastRow - distance;
 
         return board;
     }
