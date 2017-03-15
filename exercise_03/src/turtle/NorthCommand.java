@@ -9,17 +9,20 @@ import java.util.ArrayList;
  */
 public class NorthCommand extends Command {
 
+    private int distance = 0;
+
     public boolean canHandle(String instruction) {
         //Test
-        return (instruction == "north [0-9]{2}")
+        return (instruction.equals("north [0-9]{2}"));
         //throw new NotImplementedException();
     }
 
     @Override
     public Command Command(String instruction) {
-        
-        int distance;
-        throw new NotImplementedException();
+        String distance_str = instruction.replaceAll("[^0-9]", "");
+        distance = Integer.parseInt(distance_str);
+        System.out.println(distance);
+        return this;
     }
 
     @Override
