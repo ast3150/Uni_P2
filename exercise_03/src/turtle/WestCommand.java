@@ -1,17 +1,14 @@
 package turtle;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 /**
- * Created by ast on 14.03.17.
+ * Checks if input is in the right format. Extracts the number out of the String instruction. Moves the number on the board
+ *
+ * @author Samuel Schwegler 16-119-695
+ * @author Alain Stulz 16-119-414
  */
-public class NorthCommand extends Command implements ICommand {
-
+public class WestCommand extends Command implements ICommand {
     public static boolean canHandle(String instruction) {
-        return (instruction.matches("north ([0-9])*"));
+        return (instruction.matches("west ([0-9])*"));
     }
 
     public void parseFromString(String instruction) {
@@ -20,22 +17,21 @@ public class NorthCommand extends Command implements ICommand {
     }
 
     public boolean[][] executeOn(boolean[][] board, int lastColumn, int lastRow) throws ArrayIndexOutOfBoundsException, IndexOutOfBoundsException {
-        this.lastColumn= lastColumn;
+        this.lastColumn = lastColumn;
         this.lastRow = lastRow;
 
         if (lastColumn >= board[lastRow].length) throw new ArrayIndexOutOfBoundsException();
         if (lastRow >= board.length) throw new ArrayIndexOutOfBoundsException();
 
-        for (int i = lastRow; i > lastRow - distance; i--) {
+        for (int i = lastColumn; i > lastColumn - distance; i--) {
             if (i < 0) throw new IndexOutOfBoundsException();
             if (i >= board.length) throw new IndexOutOfBoundsException();
 
-            board[lastColumn][i] = true;
+            board[i][lastRow] = true;
         }
 
-        this.lastRow = lastRow - distance;
+        this.lastColumn = lastColumn - distance;
 
         return board;
     }
-
 }
