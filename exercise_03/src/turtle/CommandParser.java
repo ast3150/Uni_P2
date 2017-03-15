@@ -11,6 +11,8 @@ public class CommandParser implements ICommandParser {
     Class[] COMMANDS = {
             NorthCommand.class,
             SouthCommand.class,
+            WestCommand.class,
+            EastCommand.class,
             SouthEastCommand.class
     };
 

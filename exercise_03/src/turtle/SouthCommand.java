@@ -1,7 +1,10 @@
 package turtle;
 
 /**
- * Created by ast on 14.03.17.
+ * Checks if input is in the right format. Extracts the number out of the String instruction. Moves the number on the board
+ *
+ * @author Samuel Schwegler 16-119-695
+ * @author Alain Stulz 16-119-414
  */
 public class SouthCommand extends Command implements ICommand {
     public static boolean canHandle(String instruction) {
