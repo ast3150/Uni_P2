@@ -2,9 +2,6 @@ package turtle;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-/**
- * Created by ast on 14.03.17.
- */
 public interface ICommand {
 
     /**
@@ -49,7 +46,15 @@ public interface ICommand {
      */
     public int getDistance();
 
+    /**
+     *
+     * @return The row where the command last drew on the board, or 0 if the command has not been executed
+     */
     public int getLastRow();
 
+    /**
+     *
+     * @return The column where the command last drew on the board, or 0 if the command has not been executed
+     */
     public int getLastColumn();
 }

@@ -6,7 +6,7 @@ package turtle;
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414
  */
-public class SouthCommand extends Command implements ICommand {
+public class SouthCommand extends Command {
     public static boolean canHandle(String instruction) {
         return (instruction.matches("south ([0-9])*"));
     }

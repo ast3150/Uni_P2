@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by ast on 14.03.17.
  */
-public class NorthCommand extends Command implements ICommand {
+public class NorthCommand extends Command {
 
     public static boolean canHandle(String instruction) {
         return (instruction.matches("north ([0-9])*"));

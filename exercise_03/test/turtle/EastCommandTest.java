@@ -1,20 +1,18 @@
+package turtle; /**
+ * Created by samuel on 15.03.17.
+ */
 import org.junit.Test;
-import turtle.WestCommand;
-
+import turtle.EastCommand;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by samuel on 15.03.17.
- */
-public class WestCommandTest {
-
+public class EastCommandTest {
     @Test
     public void testCanHandleValidCommand() {
         // given
-        String s = "west 1";
-        WestCommand c = new WestCommand();
+        String s = "east 1";
+        EastCommand c = new EastCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -26,8 +24,8 @@ public class WestCommandTest {
     @Test
     public void testCanHandleValidCommand2() {
         // given
-        String s = "west 10";
-        WestCommand c = new WestCommand();
+        String s = "east 10";
+        EastCommand c = new EastCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -39,8 +37,8 @@ public class WestCommandTest {
     @Test
     public void testCannotHandleInvalidCommand() {
         // given
-        String s = "west @";
-        WestCommand c = new WestCommand();
+        String s = "east @";
+        EastCommand c = new EastCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -53,7 +51,7 @@ public class WestCommandTest {
     public void testCannotHandleDifferentCommand() {
         // given
         String s = "north 4";
-        WestCommand c = new WestCommand();
+        EastCommand c = new EastCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -65,8 +63,8 @@ public class WestCommandTest {
     @Test
     public void testCannotHandleNegativeCommand() {
         // given
-        String s = "west -3";
-        WestCommand c = new WestCommand();
+        String s = "east -3";
+        EastCommand c = new EastCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -79,10 +77,10 @@ public class WestCommandTest {
     @Test
     public void testGetsCorrectDistance() {
         // given
-        String s = "west 3";
+        String s = "east 3";
 
         // when
-        WestCommand c = new WestCommand();
+        EastCommand c = new EastCommand();
         c.parseFromString(s);
 
         // then
@@ -93,8 +91,8 @@ public class WestCommandTest {
     public void testDrawsOnBoardCorrectly() {
         // given
         boolean[][] board =  new boolean[10][10];
-        String s = "west 2";
-        WestCommand c = new WestCommand();
+        String s = "east 2";
+        EastCommand c = new EastCommand();
 
         // when
         c.parseFromString(s);
@@ -102,15 +100,15 @@ public class WestCommandTest {
 
         // then
         assertTrue(board[5][5]);
-        assertTrue(board[4][5]);
+        assertTrue(board[6][5]);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testDetectsInvalidBoardBoundaries() {
         // given
         boolean[][] board = new boolean[5][5];
-        String s = "west 2";
-        WestCommand c = new WestCommand();
+        String s = "east 2";
+        EastCommand c = new EastCommand();
         c.parseFromString(s);
 
         // when
@@ -124,8 +122,8 @@ public class WestCommandTest {
     public void testDetectsCommandRunsOutOfBounds() {
         // given
         boolean[][] board = new boolean[5][5];
-        String s = "west 10";
-        WestCommand c = new WestCommand();
+        String s = "east 10";
+        EastCommand c = new EastCommand();
         c.parseFromString(s);
 
         // when
@@ -136,6 +134,10 @@ public class WestCommandTest {
             // assertion is thrown
         } catch (IndexOutOfBoundsException e) {
             assertTrue(board[1][1]);
+            assertTrue(board[2][1]);
+            assertTrue(board[3][1]);
+            assertTrue(board[4][1]);
+            assertTrue(board[5][1]);
             throw e;
         }
     }

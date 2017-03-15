@@ -5,7 +5,8 @@ import java.util.*;
 import java.lang.reflect.*;
 
 /**
- * Created by ast on 14.03.17.
+ * Parses a string of instructions into executable commands
+ *
  */
 public class CommandParser implements ICommandParser {
     Class[] COMMANDS = {
