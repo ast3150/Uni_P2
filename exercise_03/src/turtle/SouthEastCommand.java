@@ -6,7 +6,6 @@ package turtle;
 public class SouthEastCommand extends Command implements ICommand {
 
     public static boolean canHandle(String instruction) {
-        System.out.println(instruction.matches("south east ([0-9])*"));
         return (instruction.matches("south east ([0-9])*"));
     }
 
@@ -22,16 +21,17 @@ public class SouthEastCommand extends Command implements ICommand {
         if (lastColumn >= board[lastRow].length) throw new ArrayIndexOutOfBoundsException();
         if (lastRow >= board.length) throw new ArrayIndexOutOfBoundsException();
 
-        int i = lastColumn;
-        for (int j = lastRow; j < lastRow + distance; j++) {
-            if (i < 0) throw new IndexOutOfBoundsException();
-            if (i >= board[j].length) throw new IndexOutOfBoundsException();
+        int col = lastColumn;
+        int row = lastRow;
 
-            if (j < 0) throw new IndexOutOfBoundsException();
-            if (j >= board.length) throw new IndexOutOfBoundsException();
+        for (int i = 0; i < distance; i++) {
+            if (lastColumn+i < 0) throw new IndexOutOfBoundsException();
+            if (lastColumn+i >= board.length) throw new IndexOutOfBoundsException();
 
-            board[i][j] = true;
-            i++;
+            if (lastRow+i < 0) throw new IndexOutOfBoundsException();
+            if (lastRow+i >= board.length) throw new IndexOutOfBoundsException();
+
+            board[lastColumn+i][lastRow+i] = true;
         }
 
         this.lastRow = lastRow + distance;

@@ -1,3 +1,5 @@
+package turtle;
+
 import org.junit.Test;
 import turtle.SouthCommand;
 
