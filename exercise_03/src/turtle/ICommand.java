@@ -36,9 +36,11 @@ public interface ICommand {
      * @param board      The game board that contains the current state of the game
      * @param lastRow    The last row (vertical) position of the turtle
      * @param lastColumn The last column (horizontal) position of the turtle
+     * @throws ArrayIndexOutOfBoundsException if the given lastRow or lastColumn are not on the board and the move cannot be made
+     * @throws IndexOutOfBoundsException if the command would run off the game board and could not be executed completely
      * @return The game board where the command was applied
      */
-    public boolean[][] execute(boolean[][] board, int lastRow, int lastColumn);
+    public boolean[][] execute(boolean[][] board, int lastRow, int lastColumn) throws ArrayIndexOutOfBoundsException, IndexOutOfBoundsException;
 
     /**
      * Gets the absolute distance that was parsed from instruction string.

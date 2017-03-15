@@ -2,6 +2,7 @@ package turtle;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -18,14 +19,16 @@ public class NorthCommand implements ICommand {
     public void parseFromString(String instruction) {
         String distance_str = instruction.replaceAll("[^0-9]", "");
         distance = Integer.parseInt(distance_str);
-        System.out.println(distance);
     }
 
-    public boolean[][] execute(boolean[][] board, int lastRow, int lastColumn) {
-        assert lastRow < board.length;
-        assert lastColumn <= board[0].length;
+    public boolean[][] execute(boolean[][] board, int lastRow, int lastColumn) throws ArrayIndexOutOfBoundsException, IndexOutOfBoundsException {
+        if (lastRow >= board.length) throw new ArrayIndexOutOfBoundsException();
+        if (lastColumn >= board[lastRow].length) throw new ArrayIndexOutOfBoundsException();
 
-        for (int i = lastRow; i >= lastRow - distance && i >= 0; i--) {
+        for (int i = lastRow - 1; i >= lastRow - distance; i--) {
+            if (i < 0) throw new IndexOutOfBoundsException();
+            if (i >= board.length) throw new IndexOutOfBoundsException();
+
             board[i][lastColumn] = true;
         }
 
