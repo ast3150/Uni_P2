@@ -1,22 +1,10 @@
 package snakes;
 
-/*
- * This is the WormholeEntrance class
- * The methods are inherited from Square and overridden to specify this sub-class
+/**
  * From here the players are transfered to random WormholeExits
  *
  * @author Samuel Schwegler 16-119-695
- * @author Alain Stulz
- *
- * @param game							Game instance of the Game class
- * @param position						int value of actual position
- * @param exit_rand						a random number in the range of the size of wormholeExits
- *
- * @see Square							The mother-class
- * @see Game							Game class
- * @see wormholeExits()					Method contains the list of WormholeExit
- * @see squareLabel()					Method changes the look of WormholeExits on the board.
- * @see landHereOrGoHome()				Method checks if the randomly selected WormholeExit is not ocupied
+ * @author Alain Stulz 16-119-414
  */
 
 import java.util.Random;

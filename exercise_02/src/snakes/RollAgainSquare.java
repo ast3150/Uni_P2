@@ -1,19 +1,10 @@
 package snakes;
 
-/*
- * This is the rollAgain class
- * The methods are inherited from Square and overridden to specify this sub-class
+/**
  * the player get a second die roll
  *
  * @author Samuel Schwegler 16-119-695
- * @author Alain Stulz
- *
- * @param game							Game instance of the Game class
- * @param position						int value of actual position
- *
- * @see Square							The mother-class
- * @see Game							Game class
- * @see landHereOrGoHome()				checks if the second roll is ok
+ * @author Alain Stulz 16-119-414
  */
 
 public class RollAgainSquare extends Square {

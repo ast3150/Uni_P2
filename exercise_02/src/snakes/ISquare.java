@@ -1,9 +1,14 @@
 package snakes;
 
+/**
+ * the methods wich were implemented in other classes
+ *
+ * @author Samuel Schwegler 16-119-695
+ * @author Alain Stulz 16-119-414
+ */
+
 public interface ISquare {
 	/**
-	 * Returns the position of the square on the game board
-	 *
 	 * @return the position of the square on the game board
 	 */
 	public int position();
@@ -17,15 +22,11 @@ public interface ISquare {
 	public ISquare moveAndLand(int moves);
 
 	/**
-	 * Returns true iff the square is the first square on the game board
-	 *
 	 * @return true iff the square is the first square on the game board
 	 */
 	public boolean isFirstSquare();
 
 	/**
-	 * Returns true iff the square is the last square on the game board
-	 *
 	 * @return true iff the square is the last square on the game board
 	 */
 	public boolean isLastSquare();
@@ -47,8 +48,6 @@ public interface ISquare {
 	public void leave(Player player);
 
 	/**
-	 * Returns true iff there is a player currently on this square
-	 *
 	 * @return true iff there is a player currently on this square
 	 */
 	public boolean isOccupied();
@@ -63,8 +62,6 @@ public interface ISquare {
 	public ISquare landHereOrGoHome();
 
 	/**
-	 * Returns true iff the square is registered as a wormhole exit
-	 *
 	 * @return true iff the square is registered as a wormhole exit
 	 */
 	boolean isWormholeExit();
