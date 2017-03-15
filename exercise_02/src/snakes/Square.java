@@ -1,6 +1,6 @@
 package snakes;
 
-/*
+/**
  * standart squares with no special task
  *
  * @author Samuel Schwegler 16-119-695

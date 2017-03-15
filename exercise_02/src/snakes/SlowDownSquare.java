@@ -1,6 +1,6 @@
 package snakes;
 
-/*
+/**
  * from here a player moves the half diced amount
  *
  * @author Samuel Schwegler 16-119-695

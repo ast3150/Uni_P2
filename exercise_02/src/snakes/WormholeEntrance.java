@@ -1,6 +1,6 @@
 package snakes;
 
-/*
+/**
  * From here the players are transfered to random WormholeExits
  *
  * @author Samuel Schwegler 16-119-695

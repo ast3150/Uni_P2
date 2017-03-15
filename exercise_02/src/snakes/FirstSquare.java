@@ -1,7 +1,7 @@
 package snakes;
 
 
-/*
+/**
  * Here starts the game. If a player has to go home he lands here again.
  *
  * @author Samuel Schwegler 16-119-695

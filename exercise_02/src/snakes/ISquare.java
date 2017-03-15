@@ -1,6 +1,6 @@
 package snakes;
 
-/*
+/**
  * the methods wich were implemented in other classes
  *
  * @author Samuel Schwegler 16-119-695

@@ -1,6 +1,6 @@
 package snakes;
 
-/*
+/**
  * the target of the game is to land here
  *
  * @author Samuel Schwegler 16-119-695

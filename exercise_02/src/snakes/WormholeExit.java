@@ -1,6 +1,6 @@
 package snakes;
 
-/*
+/**
  * possible exit of e wormhole
  *
  * @author Samuel Schwegler 16-119-695

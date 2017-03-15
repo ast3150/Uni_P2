@@ -1,6 +1,6 @@
 package snakes;
 
-/*
+/**
  * the player jumps to a higher field
  *
  * @author Samuel Schwegler 16-119-695
