@@ -10,7 +10,8 @@ import java.lang.reflect.*;
 public class CommandParser implements ICommandParser {
     Class[] COMMANDS = {
             NorthCommand.class,
-            SouthCommand.class
+            SouthCommand.class,
+            SouthEastCommand.class
     };
 
     public ArrayList<ICommand> parse(String instructions) throws ParserException {

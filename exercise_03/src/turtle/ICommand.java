@@ -1,8 +1,6 @@
 package turtle;
 
-import com.sun.tools.corba.se.idl.constExpr.Not;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import java.io.InvalidClassException;
 
 /**
  * Created by ast on 14.03.17.
@@ -43,11 +41,9 @@ public interface ICommand {
 
     /**
      * Gets the absolute distance that was parsed from instruction string.
-     *
-     * Uses a simple norm that adds the distances in all directions,
-     * e.g. North 8 has a distance of 8
-     * e.g. SouthWest 3, 2 has a distance of (2+3) = 5
-     * e.g. NorthEast 4, 1 has a distance of (4+1) = 5
+     * e.g. north 8 has a distance of 8
+     * e.g. south west 3 has a distance of 3
+     * e.g. north east 5 has a distance of 5
      *
      * @return the absolute distance, or 0 if no valid command has been parsed
      */
