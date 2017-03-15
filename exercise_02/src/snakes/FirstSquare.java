@@ -2,18 +2,10 @@ package snakes;
 
 
 /*
- * this is the firtsSquare class
- * the methods are inherited from Square and overridden to specify this sub-class
- * here starts the game
+ * Here starts the game. If a player has to go home he lands here again.
  *
  * @author Samuel Schwegler 16-119-695
- * @author Alain Stulz
- *
- * @param players						represents the list of players
- * @param position						int value of actual position
- *
- * @see Square							The mother-class
- * @see isOccupied						This field cant be occupied because its the start
+ * @author Alain Stulz 16-119-414
  */
 
 

@@ -1,22 +1,10 @@
 package snakes;
 
 /*
- * this is the Ladder class
- * the methods are inherited from Square and overridden to specify this sub-class
- * if a player lands on a ladder, he climps up to a higher field
+ * the player jumps to a higher field
  *
  * @author Samuel Schwegler 16-119-695
- * @author Alain Stulz
- *
- * @param game							Game instance of the Game class
- * @param position						int value of actual position
- * @param transport						int value of the transport range
- *
- * @see Square							The mother-class
- * @see Game							Game class
- * @see squareLabel()					Method changes the look of Ladder on the board and shoes where the ladder goes
- * @see landHereOrGoHome()				Checks if a field is allready ocupied
- * @see destination()					Gets the new position after the ladder
+ * @author Alain Stulz 16-119-414
  */
 
 

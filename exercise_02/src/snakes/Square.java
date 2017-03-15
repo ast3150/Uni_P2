@@ -1,26 +1,10 @@
 package snakes;
 
 /*
- * this is the Square class
- * the class creates all the squares
+ * standart squares with no special task
  *
  * @author Samuel Schwegler 16-119-695
- * @author Alain Stulz
- *
- * @param game							Game instance of the Game class
- * @param position						int value of actual position
- * @param player						the actual player
- *
- * @see ISquare							The Interface of Square
- * @see position						returns the player position
- * @see moveAndLand						moves the player and checks landHereOrGoHome()
- * @see nextSquare						returns the player position plus one square
- * @see previousSquare					returns the player position minus one square
- * @see landHereOrGoHome				if the field is allready occupied (isOccupied()) the player is sent back to the start
- * @see isWormholeExit					if a child class is a WormholeExit this function gets important
- * @see toString						the square look on the playboard
- * @see isOccupied						checks if the field is occupied
- * @see player							represents the players name on the board
+ * @author Alain Stulz 16-119-414
  */
 
 public class Square implements ISquare {
