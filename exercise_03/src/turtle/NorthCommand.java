@@ -11,16 +11,14 @@ public class NorthCommand extends Command {
 
     public boolean canHandle(String instruction) {
         //Test
-        if (instruction == "north [0-9]{2}"){
-            return true;
-        } else {
-            return false;
-        }
+        return (instruction == "north [0-9]{2}")
         //throw new NotImplementedException();
     }
 
     @Override
     public Command Command(String instruction) {
+        
+        int distance;
         throw new NotImplementedException();
     }
 
