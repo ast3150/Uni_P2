@@ -1,6 +1,5 @@
-import org.junit.*;
-import turtle.BoardMaker;
-import turtle.NorthCommand;
+import org.junit.Test;
+import turtle.SouthCommand;
 
 import static org.junit.Assert.*;
 
@@ -8,13 +7,13 @@ import static org.junit.Assert.*;
 /**
  * Created by ast on 15.03.17.
  */
-public class NorthCommandTest {
+public class SouthCommandTest {
 
     @Test
     public void testCanHandleValidCommand() {
         // given
-        String s = "north 1";
-        NorthCommand c = new NorthCommand();
+        String s = "south 1";
+        SouthCommand c = new SouthCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -26,8 +25,8 @@ public class NorthCommandTest {
     @Test
     public void testCanHandleValidCommand2() {
         // given
-        String s = "north 10";
-        NorthCommand c = new NorthCommand();
+        String s = "south 10";
+        SouthCommand c = new SouthCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -39,8 +38,8 @@ public class NorthCommandTest {
     @Test
     public void testCannotHandleInvalidCommand() {
         // given
-        String s = "north &";
-        NorthCommand c = new NorthCommand();
+        String s = "south @";
+        SouthCommand c = new SouthCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -52,8 +51,8 @@ public class NorthCommandTest {
     @Test
     public void testCannotHandleDifferentCommand() {
         // given
-        String s = "south 4";
-        NorthCommand c = new NorthCommand();
+        String s = "west 4";
+        SouthCommand c = new SouthCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -65,8 +64,8 @@ public class NorthCommandTest {
     @Test
     public void testCannotHandleNegativeCommand() {
         // given
-        String s = "north -3";
-        NorthCommand c = new NorthCommand();
+        String s = "south -3";
+        SouthCommand c = new SouthCommand();
 
         // when
         boolean canHandle = c.canHandle(s);
@@ -79,10 +78,10 @@ public class NorthCommandTest {
     @Test
     public void testGetsCorrectDistance() {
         // given
-        String s = "north 3";
+        String s = "south 3";
 
         // when
-        NorthCommand c = new NorthCommand();
+        SouthCommand c = new SouthCommand();
         c.parseFromString(s);
 
         // then
@@ -93,8 +92,8 @@ public class NorthCommandTest {
     public void testDrawsOnBoardCorrectly() {
         // given
         boolean[][] board =  new boolean[10][10];
-        String s = "north 2";
-        NorthCommand c = new NorthCommand();
+        String s = "south 2";
+        SouthCommand c = new SouthCommand();
 
         // when
         c.parseFromString(s);
@@ -102,15 +101,15 @@ public class NorthCommandTest {
 
         // then
         assertTrue(board[5][5]);
-        assertTrue(board[5][4]);
+        assertTrue(board[5][6]);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testDetectsInvalidBoardBoundaries() {
         // given
         boolean[][] board = new boolean[5][5];
-        String s = "north 2";
-        NorthCommand c = new NorthCommand();
+        String s = "south 2";
+        SouthCommand c = new SouthCommand();
         c.parseFromString(s);
 
         // when
@@ -124,21 +123,22 @@ public class NorthCommandTest {
     public void testDetectsCommandRunsOutOfBounds() {
         // given
         boolean[][] board = new boolean[5][5];
-        String s = "north 10";
-        NorthCommand c = new NorthCommand();
+        String s = "south 10";
+        SouthCommand c = new SouthCommand();
         c.parseFromString(s);
 
         // when
         try {
-            board = c.executeOn(board, 1, 4);
+            board = c.executeOn(board, 1, 1);
 
             // then
             // assertion is thrown
         } catch (IndexOutOfBoundsException e) {
-            assertTrue(board[1][3]);
-            assertTrue(board[1][2]);
             assertTrue(board[1][1]);
-            assertTrue(board[1][0]);
+            assertTrue(board[1][2]);
+            assertTrue(board[1][3]);
+            assertTrue(board[1][4]);
+            assertTrue(board[1][5]);
 
             throw e;
         }

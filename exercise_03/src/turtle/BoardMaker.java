@@ -1,13 +1,11 @@
 package turtle;
 
+import java.util.ArrayList;
+
 public class BoardMaker {
 	private boolean[][] board;
 	private final static int SIZE = 100;
 
-	public static void main(String[] args) {
-		CommandParser p = new CommandParser();
-		System.out.println("nom");
-	}
 	/**
 	 * Parse the given turtle program and evaluate it. Render the trail as
 	 * described in the problem description and return a SIZExSIZE board
@@ -17,32 +15,30 @@ public class BoardMaker {
 	 * @return SIZExSIZE boolean board, where true values denote "red trail".
 	 */
 	public boolean[][] makeBoardFrom(String turtleProgram) throws ParserException {
-		//Command[] c = {NorthCommand};
-		// TODO: Read text below!
-		// You should handle parsing of the program in a different class.
-		// That class should create and store individual programs, which
-		// can then be executed.
-		//
-		// An example of how this method could be implemented follows.
-		// Please note that this is not real Java code; you will have
-		// to come up with your own classes and structures!
-		/*
-		// You can create a new board each time makeBoardFrom is called.
-		boolean[][] board = new boolean[SIZE][SIZE];
+		board = new boolean[SIZE][SIZE];
 
 		// Create a parser that accepts a program and creates individual
 		// programs.
-		CommandParser parser = new CommandParser();
-		parser.parse(turtleProgram);
+		ICommandParser parser = new CommandParser();
+
+		// Parse the commands
+		ArrayList<ICommand> commands = parser.parse(turtleProgram);
 
 		// Iterate over the parsed commands and keep track of the turtle.
-		for each parsed command {
-			execute the command on the board and update the state of the turtle
-		}
-		*/
+		int lastColumn = 0;
+		int lastRow = 0;
 
-		// TODO: remove this and return a board instead
-		throw new UnsupportedOperationException();
+		for (ICommand c : commands) {
+			try {
+				c.executeOn(board, lastColumn, lastRow);
+				lastColumn = c.getLastColumn();
+				lastRow = c.getLastRow();
+			} catch (Exception e) {
+				throw new ParserException();
+			}
+		}
+
+		return board;
 	}
 
 	/**
@@ -50,7 +46,6 @@ public class BoardMaker {
 	 * @return board, must be of size SIZExSIZE.
 	 */
 	public boolean[][] initialBoard() {
-		// TODO: remove this and return a board instead
-		throw new UnsupportedOperationException();
+		return new boolean[SIZE][SIZE];
 	}
 }
