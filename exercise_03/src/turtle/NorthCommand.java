@@ -10,9 +10,7 @@ import java.util.ArrayList;
 public class NorthCommand extends Command {
 
     public boolean canHandle(String instruction) {
-        //Test
-        return (instruction == "north [0-9]{2}")
-        //throw new NotImplementedException();
+        return (instruction.matches("north [0-9]{2}"));
     }
 
     @Override
