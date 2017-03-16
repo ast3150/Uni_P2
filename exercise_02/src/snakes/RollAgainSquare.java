@@ -1,7 +1,7 @@
 package snakes;
 
 /**
- * the player get a second die roll
+ * Gives the player a second dice roll
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414

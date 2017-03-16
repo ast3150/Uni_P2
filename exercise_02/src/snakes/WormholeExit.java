@@ -1,7 +1,9 @@
 package snakes;
 
 /**
- * possible exit of e wormhole
+ * Possible exit of a wormhole. To recognise it isWormholeExit has to be overridden to true
+ *
+ * @see WormholeEntrance
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414

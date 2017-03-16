@@ -2,7 +2,8 @@ package snakes;
 
 
 /**
- * Here starts the game. If a player has to go home he lands here again.
+ * Starts the game. If a player has to go home he lands here again
+ * therefore the isOccupied function never returns true here. And a for-loop is needed to print multiple players
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414

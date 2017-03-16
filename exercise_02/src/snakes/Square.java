@@ -1,7 +1,7 @@
 package snakes;
 
 /**
- * standart squares with no special task
+ * Describes a standard square, default case
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414
