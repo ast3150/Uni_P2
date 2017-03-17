@@ -1,7 +1,7 @@
 package snakes;
 
 /**
- * from here a player moves the half diced amount
+ * Beeing on this field a player moves the half diced amount
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414

@@ -1,7 +1,7 @@
 package snakes;
 
 /**
- * player moves the diced count backwards
+ * Being here a player moves the diced count backwards
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz  16-119-414

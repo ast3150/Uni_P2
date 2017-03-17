@@ -1,7 +1,7 @@
 package snakes;
 
 /**
- * the player jumps to a higher field
+ * Lifts a player to a higher field, the distance to the top of the ladder is defined with transport
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414

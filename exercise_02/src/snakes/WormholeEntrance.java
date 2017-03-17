@@ -1,7 +1,10 @@
 package snakes;
 
 /**
- * From here the players are transfered to random WormholeExits
+ * Transfering player to a random WormholeExit.
+ *
+ * @see WormholeExit
+ * @see wormholeExits()     gets the list of exits
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414

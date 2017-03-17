@@ -1,7 +1,7 @@
 package snakes;
 
 /**
- * the player jumps to a lower field
+ * Fall to a lower field
  *
  * @author Samuel Schwegler 16-119-695
  * @author Alain Stulz 16-119-414
