@@ -26,7 +26,7 @@ public class Game {
 	/**
 	 * Single die instance that all players are required to use.
 	 */
-	private Die die;
+	private IDie die;
 
 	private boolean invariant() {
 		return squares.size() > 3
@@ -46,7 +46,7 @@ public class Game {
 		this.size = size;
 		this.addSquares(size);
 		this.addPlayers(players);
-		this.die = new Die(dieSides);
+		this.die = new IDie(dieSides);
 		assert invariant();
 	}
 
@@ -65,7 +65,7 @@ public class Game {
 		game.setSquareToLadder(2, 4);
 		game.setSquareToLadder(6, 2);
 		game.setSquareToSnake(11, -6);
-		game.play();
+		game.play(game.die);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Game {
 	 * and log statements to stdout and announces the winner once the
 	 * game is over.
 	 */
-	public void play() {
+	public void play(IDie die) {
 		System.out.println("Initial state: " + this);
 		while (this.notOver()) {
 			int roll = die.roll();
