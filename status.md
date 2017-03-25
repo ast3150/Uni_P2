@@ -3,7 +3,7 @@
 Week  Status
 ----  --------
 01    ok
-02    revise (16 March)
+02    ok
 03
 04
 05

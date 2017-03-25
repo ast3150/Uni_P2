@@ -50,3 +50,11 @@ You solved most of the tasks, but your class comments are not good. Fix them
 before **Thursday, 16 March, 13:00** according to the comments above, the 
 mandatory reading material, and the presented examples in the presentations. 
 You also need to write a JavaDoc class/interface comment for `ISquare`.
+
+### Update 25 March
+
+Accepted (ok).
+
+Your fixes are very minimal and mostly bad. The comment for `ISquare` is just 
+horrible. Nevertheless, since you at least wrote *something*, you will get a 
+very generous "ok".
