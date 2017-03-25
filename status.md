@@ -4,7 +4,7 @@ Week  Status
 ----  --------
 01    ok
 02    ok
-03
+03    fail
 04
 05
 06
