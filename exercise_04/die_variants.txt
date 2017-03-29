@@ -1,0 +1,11 @@
+MockDie
+Die Variante mit einem MockDie Element bietet den Vorteil spezifische Methoden für die Tests zu schreiben. Bspw getRollTimes().
+
+mock(Die.class)
+Schnellere Anwendung, weniger aufwändig. Sehr flexibel für jeder Test ohne viel code ändern zu müssen. Bspw: when(die.roll()).thenReturn(2);
+
+Zusammenfassung
+Bei grösseren Projekten ist es bestimmt effizienter die vielen Objekte mit mock zu simulieren. Für unsere Aufgabe fanden wir das MockDie Element praktischer.
+Auch ist die Variante mit mock(Die.class) noch Neuland und man tendiert dazu vertrautes lieber zu benutzen.
+Man könnte den MockDie auch mit einem constructor versehen in dem man pro Objekt eine Wurfweite bestimmen kann. Was es schlussendlich auch flexibel macht.
+

@@ -1,10 +1,14 @@
 package snakes;
 
 /**
- * A die for rolling random numbers
+ * creates a MockDie element for testing
+ *
+ * @author Samuel Schwegler 16-119-695
+ * @author Alain Stulz 16-119-414
  */
 public class MockDie implements IDie {
-    protected final int faces;
+    public int count = 0;
+    protected int faces;
 
     /**
      * Initialize a new die with given faces
@@ -22,8 +26,23 @@ public class MockDie implements IDie {
      */
     @Override
     public int roll() {
-        int result = 1 + (int) (faces * Math.random());
-        assert result >= 1 && result <= faces;
-        return result;
+        count++;
+        return 2;
+    }
+
+    @Override
+    public int getFaces(){
+        return faces;
+    }
+
+    public void setFaces(int new_faces){
+        this.faces = new_faces;
+    }
+
+    /**
+     * @return times function roll is called
+     */
+    public int getRollTimes(){
+        return count;
     }
 }
