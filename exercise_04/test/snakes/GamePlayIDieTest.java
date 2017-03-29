@@ -11,8 +11,9 @@ import static org.mockito.Mockito.mock;
 public class GamePlayIDieTest {
     @Test
     public void play() {
-        IDie die = mock(IDie.class);
+        IDie die = mock(Die.class);
         Game game = mock(Game.class);
+
         System.out.println("Initial state: " + game);
         while (game.notOver()) {
             int roll = die.roll();

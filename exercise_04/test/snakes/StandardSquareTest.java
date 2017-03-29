@@ -1,6 +1,6 @@
 package snakes;
 
-import org.junit.Test;
+import org.junit.*;
 import snakes.squares.Square;
 import snakes.squares.StandardSquare;
 

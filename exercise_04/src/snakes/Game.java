@@ -46,7 +46,7 @@ public class Game {
 		this.size = size;
 		this.addSquares(size);
 		this.addPlayers(players);
-		this.die = new IDie(dieSides);
+		this.die = new Die(dieSides);
 		assert invariant();
 	}
 
@@ -269,7 +269,7 @@ public class Game {
 		return exits;
 	}
 
-	public Die getDie() {
+	public IDie getDie() {
 		return die;
 	}
 

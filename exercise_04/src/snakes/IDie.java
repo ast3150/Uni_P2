@@ -1,29 +1,12 @@
 package snakes;
 
 /**
- * A die for rolling random numbers
+ * Created by ast on 21.03.17.
  */
-public class IDie implements Die {
-	protected final int faces;
+public interface IDie {
+    int faces = 0;
 
-	/**
-	 * Initialize a new die with given faces
-	 * @param faces number of sides, must be > 0
-	 */
-	public IDie(int faces) {
-		assert faces > 0;
-		this.faces = faces;
-	}
+    int roll();
 
-	/**
-	 * Roll the die and obtain the result
-	 *
-	 * @return a random number between 1 and faces
-	 */
-	@Override
-    public int roll() {
-		int result = 1 + (int) (faces * Math.random());
-		assert result >= 1 && result <= faces;
-		return result;
-	}
+    public int getFaces();
 }
