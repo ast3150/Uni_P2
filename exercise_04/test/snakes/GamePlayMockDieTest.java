@@ -1,32 +1,29 @@
-
-package snakes;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
 import static org.junit.Assert.*;
 
 /**
  * Created by samuel on 22.03.17.
  */
-public class GamePlayIDieTest {
-    Die die = mock(Die.class);
-
+public class GamePlayMockDieTest {
     private static final int FACES = 6;
     //Times the die gets rolled
     private static final int MAX = 6;
 
+    snakes.MockDie die = new snakes.MockDie(FACES);
+
     @Test
-    public void moveMin(){
+    public void moveMinTest(){
         assertTrue(hit(1));
     }
 
     @Test
-    public void moveMax(){
+    public void moveMaxTest(){
         assertTrue(hit(FACES));
     }
 
     @Test
-    public void maxMin(){
+    public void maxMinTest(){
         assertTrue(range());
     }
 

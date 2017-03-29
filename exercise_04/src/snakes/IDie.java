@@ -1,12 +1,8 @@
 package snakes;
 
 /**
- * Created by ast on 21.03.17.
+ * A die for rolling random numbers
  */
 public interface IDie {
-    int faces = 0;
-
-    int roll();
-
-    public int getFaces();
+	int roll();
 }

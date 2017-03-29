@@ -1,16 +1,16 @@
 package snakes;
 
 /**
- * Created by ast on 21.03.17.
+ * A die for rolling random numbers
  */
-public class Die implements IDie {
+public class MockDie implements IDie {
     protected final int faces;
 
     /**
      * Initialize a new die with given faces
      * @param faces number of sides, must be > 0
      */
-    public Die(int faces) {
+    public MockDie(int faces) {
         assert faces > 0;
         this.faces = faces;
     }
