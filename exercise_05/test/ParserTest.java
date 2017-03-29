@@ -110,10 +110,11 @@ public class ParserTest {
 	}
 
 	@Test
+	/// WARNING: Make sure your Run/Debug configuration has the project root set as working directory
 	public void testParseGameFromFile() throws ParseException {
 		// given
 		Parser parser = new Parser();
-		String filePath = "../../games/game2.txt";
+		String filePath = "games/game2.txt";
 
 		// when
 		Game game = parser.parseGameFromFile(filePath);
