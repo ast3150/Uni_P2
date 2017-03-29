@@ -16,7 +16,7 @@ public class Die implements IDie {
     }
 
     /**
-     * Roll the die and obtain the result
+     * Roll the die and obtain the result. It makes no sense to test this method because it only does return a random numbe
      *
      * @return a random number between 1 and faces
      */
@@ -25,5 +25,10 @@ public class Die implements IDie {
         int result = 1 + (int) (faces * Math.random());
         assert result >= 1 && result <= faces;
         return result;
+    }
+
+    @Override
+    public int getFaces() {
+        return faces;
     }
 }

@@ -19,7 +19,7 @@ public class LadderSquare extends StandardSquare {
 	/**
 	 * Tests whether the transport is within the bounds of the game and > 0.
 	 */
-	protected boolean isValidTransport(int transport) {
+	public boolean isValidTransport(int transport) {
 		return transport > 0 &&
 				game.isValidPosition(position + transport);
 	}

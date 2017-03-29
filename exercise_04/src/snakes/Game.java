@@ -75,7 +75,7 @@ public class Game {
 	 * and log statements to stdout and announces the winner once the
 	 * game is over.
 	 */
-	public void play(Die die) {
+	public void play(IDie die) {
 		System.out.println("Initial state: " + this);
 		while (this.notOver()) {
 			int roll = die.roll();

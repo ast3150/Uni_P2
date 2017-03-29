@@ -2,51 +2,39 @@
 package snakes;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
+import snakes.Game;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 /**
- * Created by samuel on 22.03.17.
+ * Tests the Game#play(IDie) with mock(Die.class)
+ *
+ * @author Samuel Schwegler 16-119-695
+ * @author Alain Stulz 16-119-414
  */
 public class GamePlayIDieTest {
-    Die die = mock(Die.class);
-
-    private static final int FACES = 6;
-    //Times the die gets rolled
-    private static final int MAX = 6;
 
     @Test
-    public void moveMin(){
-        assertTrue(hit(1));
-    }
+    public void runGameMockTest() throws GameNotOverException{
+        IDie die = mock(Die.class);
 
-    @Test
-    public void moveMax(){
-        assertTrue(hit(FACES));
-    }
+        Queue<Player> players = new LinkedList<>();
+        players.add(new Player("Hans"));
+        players.add(new Player("Heiri"));
 
-    @Test
-    public void maxMin(){
-        assertTrue(range());
-    }
+        Game game = new Game(15, players, 6);
 
-    /**
-     * @return true, if the value has been rolled, false otherwise
-     */
-    private boolean hit(int num){
-        for(int i = 1; i <= MAX; i++){
-            if (die.roll() == num) return true;
-        }
-        return false;
-    }
+        when(die.roll()).thenReturn(2);
+        assertTrue(game.notOver());
 
-    /**
-     * @return false, if a value out of range occurs, true otherwise
-     */
-    private boolean range(){
-        for(int i = 1; i <= MAX; i++){
-            if (die.roll() < 1 || die.roll() > FACES) return false;
-        }
-        return true;
+        game.play(die);
+
+        assertTrue(game.isOver());
+        /* Check if the winner is the first player (Hans), because the Die roles everytime 2, so there is no chance for Heiri to winn */
+        assertEquals(game.winner(), players.element());
     }
 }

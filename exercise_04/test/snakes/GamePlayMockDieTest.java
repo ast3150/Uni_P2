@@ -1,49 +1,38 @@
+package snakes;
+
 import org.junit.Test;
+import snakes.*;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by samuel on 22.03.17.
+ * Tests the Game#play(IDie) with a MockDie class
+ *
+ * @author Samuel Schwegler 16-119-695
+ * @author Alain Stulz 16-119-414
  */
 public class GamePlayMockDieTest {
-    private static final int FACES = 6;
-    //Times the die gets rolled
-    private static final int MAX = 6;
-
-    snakes.MockDie die = new snakes.MockDie(FACES);
-
     @Test
-    public void moveMinTest(){
-        assertTrue(hit(1));
-    }
+    public void runGameMockDieTest() throws GameNotOverException {
+        final int FACES = 6;
 
-    @Test
-    public void moveMaxTest(){
-        assertTrue(hit(FACES));
-    }
+        snakes.MockDie mockedDie = new snakes.MockDie(FACES);
 
-    @Test
-    public void maxMinTest(){
-        assertTrue(range());
-    }
+        Queue<Player> players = new LinkedList<>();
+        players.add(new Player("Hans"));
+        players.add(new Player("Heiri"));
 
-    /**
-     * @return true, if the value has been rolled, false otherwise
-     */
-    private boolean hit(int num){
-        for(int i = 1; i <= MAX; i++){
-            if (die.roll() == num) return true;
-        }
-        return false;
-    }
+        Game game = new Game(15, players, 6);
 
-    /**
-     * @return false, if a value out of range occurs, true otherwise
-     */
-    private boolean range(){
-        for(int i = 1; i <= MAX; i++){
-            if (die.roll() < 1 || die.roll() > FACES) return false;
-        }
-        return true;
+        assertTrue(game.notOver());
+
+        game.play(mockedDie);
+
+        assertTrue(game.isOver());
+         /* Check if the winner is the first player (Hans), because the Die roles everytime 2, so there is no chance for Heiri to winn */
+        assertEquals(game.winner(), players.element());
     }
 }

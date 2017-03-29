@@ -82,9 +82,9 @@ approaches to mocking as follows:
   the die behaviour as you need it for your test (you are of course free to do 
   whatever you want in `MockDie`).
 
-In the exercise_04 folder of your group repository, create a new text file 
+*In the exercise_04 folder of your group repository, create a new text file 
 (.txt, .md, etc.) and write a short paragraph about these two approaches to 
-mocking. Tell us which approach is better in your opinion and why.
+mocking. Tell us which approach is better in your opinion and why.*
 
 Note that you are not allowed to copy the `DieTest` from exercise 2 or the 
 files available on the course site.
