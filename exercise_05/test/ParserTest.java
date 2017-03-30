@@ -18,19 +18,12 @@ public class ParserTest {
 		String inputString = "8 12";
 
 		// when
-		try {
-			int[] boardSize = parser.parseBoardSizeFromLine(inputString);
+		Position boardSize = parser.parseBoardSizeFromLine(inputString);
 
-			// then
-			assertEquals(boardSize.length, 2);
-
-			int[] expectedBoardSize = {8, 12};
-			assertArrayEquals(expectedBoardSize, boardSize);
-
-		} catch (Exception e) {
-			throw e;
-		}
-  	}
+		// then
+		Position expectedBoardSize = new Position(8, 12);
+		assert(boardSize.equals(expectedBoardSize));
+	}
 
   	@Test(expected = ParseException.class)
 	public void testDoesNotParseBoardSizeFromLineWithOnlyOneValue() throws ParseException {
@@ -72,7 +65,7 @@ public class ParserTest {
 		Player parsedPlayer = parser.parsePlayerFromLine(inputString);
 
 		// then
-		Player expectedPlayer = new Player("Jimi Hendrix", "H", new Position(1, 2), "R");
+		Player expectedPlayer = new Player("Jimi Hendrix", "H", new Position(2, 3), "R");
 		assert(parsedPlayer.equals(expectedPlayer));
 	}
 
@@ -100,13 +93,14 @@ public class ParserTest {
 		// then
 		assertEquals(game.getPlayers().length, 2);
 
-		Player expectedPlayer1 = new Player("Otis Redding", "O", new Position(1, 1), "R");
-		Player expectedPlayer2 = new Player("Solomon Burke", "S", new Position(7, 12), "L");
+		Player expectedPlayer1 = new Player("Otis Redding", "O", new Position(2, 2), "R");
+		Player expectedPlayer2 = new Player("Solomon Burke", "S", new Position(8, 13), "L");
 		assertTrue("Player 1 did not match definition", game.getPlayers()[0].equals(expectedPlayer1));
 		assertTrue("Player 2 did not match definition", game.getPlayers()[1].equals(expectedPlayer2));
 
-		assertEquals(game.getBoard().length, 7);
-		assertEquals(game.getBoard()[0].length, 12);
+		// Board automatically creates walls so we expect the size to be the given size + 2
+		assertEquals(game.getBoard().length, 9);
+		assertEquals(game.getBoard()[0].length, 14);
 	}
 
 	@Test
@@ -122,12 +116,13 @@ public class ParserTest {
 		// then
 		assertEquals(game.getPlayers().length, 2);
 
-		Player expectedPlayer1 = new Player("Kris Kristofferson", "K", new Position(1, 1), "R");
-		Player expectedPlayer2 = new Player("Janis Joplin", "J", new Position(1, 3), "R");
+		Player expectedPlayer1 = new Player("Kris Kristofferson", "K", new Position(2, 2), "R");
+		Player expectedPlayer2 = new Player("Janis Joplin", "J", new Position(2, 4), "R");
 		assertTrue("Player 1 did not match definition", game.getPlayers()[0].equals(expectedPlayer1));
 		assertTrue("Player 2 did not match definition", game.getPlayers()[1].equals(expectedPlayer2));
 
-		assertEquals(game.getBoard().length, 3);
-		assertEquals(game.getBoard()[0].length, 3);
+		// Board automatically creates walls so we expect the size to be the given size + 2
+		assertEquals(game.getBoard().length, 5);
+		assertEquals(game.getBoard()[0].length, 5);
 	}
 }

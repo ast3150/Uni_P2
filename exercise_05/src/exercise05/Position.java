@@ -1,7 +1,5 @@
 package exercise05;
 
-import javafx.geometry.Pos;
-
 /**
  * Created by ast on 30.03.17.
  */
@@ -13,6 +11,8 @@ public class Position {
 		this.x = x;
 		this.y = y;
 	}
+
+	// Standard Helpers
 
 	public boolean equals(Position otherPosition) {
 		return this.x == otherPosition.x && this.y == otherPosition.y;
