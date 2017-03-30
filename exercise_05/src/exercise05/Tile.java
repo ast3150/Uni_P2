@@ -1,16 +1,30 @@
 package exercise05;
 
+/**
+ * A single element of a {@link Game} board.
+ */
 public class Tile {
 	private boolean isWall = false;
 	private Player player;
 
 	// Moves
 
+	/**
+	 *
+	 * @return true if the square is not a wall and currently has no player
+	 */
 	public boolean canMoveHere() {
 		return !this.isWall && this.player == null;
 	}
 
+	/**
+	 * Sets the value of player in the tile.
+	 * @invariant Move should be a valid move
+	 * @param player The player to be moved to this Tile
+	 */
 	public void moveHere(Player player) {
+		assert canMoveHere();
+
 		this.player = player;
 	}
 

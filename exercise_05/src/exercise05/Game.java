@@ -19,6 +19,11 @@ public class Game {
 		setPlayersToInitialPosition(this.players);
 	}
 
+	/**
+	 * Generates an empty board that has a wall around it
+	 * @param size the inner size of the board, without the outer wall
+	 * @return An empty board of type Tile[][]
+	 */
 	public Tile[][] generateEmptyBoard(Position size) {
 		assert(size.x > 0);
 		assert(size.y > 0);
@@ -50,6 +55,10 @@ public class Game {
 		return board;
 	}
 
+	/**
+	 * Moves the players to their initial position. Should only be used for setting up a new Game.
+	 * @param players The players to be placed on the board. Need to have currentPosition attribute set.
+	 */
 	public void setPlayersToInitialPosition(Player[] players) {
 		for (Player p : players) {
 			Position startPosition = p.getPosition();
@@ -59,6 +68,11 @@ public class Game {
 
 	// Moves
 
+	/**
+	 * Checks whether a move is valid or not
+	 * @param to The position to move to
+	 * @return true if the position is on the board, and the tile can be moved to
+	 */
 	public boolean isValidMove(Position to) {
 		boolean valid = true;
 		valid = (board.length > to.x) && valid;
@@ -68,6 +82,12 @@ public class Game {
 		return valid;
 	}
 
+	/**
+	 * Sets a new position on player and tile.
+	 * @param player The player to move
+	 * @param to The position to move to
+	 * @throws InvalidArgumentException If the move is not valid (i.e. not on the board, or the tile cannot be moved to)
+	 */
 	public void movePlayer(Player player, Position to) throws InvalidArgumentException {
 		if (! isValidMove(to)) {
 			String s = "Invalid move for Player " + player.toString();

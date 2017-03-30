@@ -16,6 +16,12 @@ import static java.nio.file.Paths.get;
  */
 public class Parser {
 
+	/**
+	 * Reads input from a text file and sets up a {@link Game} object based on the input.
+	 * @param path A valid file path
+	 * @return The created Game object
+	 * @throws ParseException If the file does not exist or the input can not be read.
+	 */
 	public Game parseGameFromFile(String path) throws ParseException {
 		String stringFromFile = "";
 		try {
@@ -32,6 +38,12 @@ public class Parser {
 		return parseGameFromString(stringFromFile);
 	}
 
+	/**
+	 * Creates a game object from a multiline input string
+	 * @param s The string to parse and generate the game from
+	 * @return The created Game object
+	 * @throws ParseException If the input can not be read.
+	 */
 	public Game parseGameFromString(String s) throws ParseException {
 		boolean isFirstLine = true;
 
@@ -57,6 +69,12 @@ public class Parser {
 		return new Game(playersArray, boardSize);
 	}
 
+	/**
+	 * Parses the first line of an input String, to obtain the board size
+	 * @param l A single line String
+	 * @return A {@link Position} object with the desired position of the bottom right tile.
+	 * @throws ParseException If the input can not be read
+	 */
 	public Position parseBoardSizeFromLine(String l) throws ParseException {
 
 		Matcher m = Pattern.compile("([0-9]+) ([0-9]+)").matcher(l);
@@ -69,6 +87,12 @@ public class Parser {
 		return new Position(Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2)));
 	}
 
+	/**
+	 * Parses a player from an input String
+	 * @param l A single line String
+	 * @return A {@link Player} representing the state that was read from the input string.
+	 * @throws ParseException If the input can not be read
+	 */
 	public Player parsePlayerFromLine(String l) throws ParseException {
 		Matcher m = Pattern.compile("(.+) (.) (\\d+) (\\d+) (.)").matcher(l);
 
