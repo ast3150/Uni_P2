@@ -85,7 +85,7 @@ public class ParserTest {
 		Parser parser = new Parser();
 		String inputString = "7 12\n" +
 				"Otis Redding O 1 1 R\n" +
-				"Solomon Burke S 7 12 L\n";
+				"Solomon Burke S 6 11 L\n";
 
 		// when
 		Game game = parser.parseGameFromString(inputString);
@@ -94,7 +94,7 @@ public class ParserTest {
 		assertEquals(game.getPlayers().length, 2);
 
 		Player expectedPlayer1 = new Player("Otis Redding", "O", new Position(2, 2), "R");
-		Player expectedPlayer2 = new Player("Solomon Burke", "S", new Position(8, 13), "L");
+		Player expectedPlayer2 = new Player("Solomon Burke", "S", new Position(7, 12), "L");
 		assertTrue("Player 1 did not match definition", game.getPlayers()[0].equals(expectedPlayer1));
 		assertTrue("Player 2 did not match definition", game.getPlayers()[1].equals(expectedPlayer2));
 

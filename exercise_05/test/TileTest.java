@@ -27,4 +27,9 @@ public class TileTest {
 		// then
 		assertTrue(equals);
 	}
+
+	@Test
+	public void testCannotMoveToWall() {
+		
+	}
 }
