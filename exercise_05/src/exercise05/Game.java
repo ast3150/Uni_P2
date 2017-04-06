@@ -3,22 +3,35 @@ package exercise05;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Represents a Quoridor game.
  */
 public class Game {
-	private Player[] players;
+	private Queue<Player> players;
 	private Tile[][] board;
+	private IDriver driver;
 
 	// Constructors
 
 	public Game(Player[] players, Position boardSize) {
-		this.players = players;
+		this.players = createPlayerQueue(players);
 		this.board = generateEmptyBoard(boardSize);
 
-		setPlayersToInitialPosition(this.players);
+		setPlayersToInitialPosition((LinkedList<Player>) this.players);
 	}
 
+	public Queue<Player> createPlayerQueue(Player[] players) {
+		Queue<Player> q = new LinkedList<Player>();
+
+		for (Player p : players) {
+			q.add(p);
+		}
+
+		return q;
+	}
 	/**
 	 * Generates an empty board that has a wall around it
 	 * @param size the inner size of the board, without the outer wall
@@ -35,6 +48,8 @@ public class Game {
 			}
 		}
 
+		// Border walls
+
 		// Set up top wall
 		for (Tile t : board[0]) {
 			t.setIsWall(true);
@@ -45,11 +60,22 @@ public class Game {
 			t.setIsWall(true);
 		}
 
-		// Set up left and right walls
+		// Set up left and right walls, left and right goal squares
 		for (Tile[] row : board) {
-			for (int col = 0; col < row.length; col += row.length - 1) {
-				row[col].setIsWall(true);
-			}
+			row[0].setIsWall(true);
+			row[1].addWinningPosition('L');
+			row[row.length-2].addWinningPosition('R');
+			row[row.length-1].setIsWall(true);
+		}
+
+		// Set up top winning squares
+		for (Tile t : board[1]) {
+			t.addWinningPosition('U');
+		}
+
+		// Set up bottom winning squares
+		for (Tile t : board[board.length-2]) {
+			t.addWinningPosition('D');
 		}
 
 		return board;
@@ -59,54 +85,61 @@ public class Game {
 	 * Moves the players to their initial position. Should only be used for setting up a new Game.
 	 * @param players The players to be placed on the board. Need to have currentPosition attribute set.
 	 */
-	public void setPlayersToInitialPosition(Player[] players) {
+	public void setPlayersToInitialPosition(LinkedList<Player> players) {
 		for (Player p : players) {
 			Position startPosition = p.getPosition();
 			board[startPosition.x][startPosition.y].moveHere(p);
 		}
 	}
 
-	// Moves
+	// Main Loop
+	public void start() {
+		System.out.println("So it begins!");
+		driver.renderGame();
 
-	/**
-	 * Checks whether a move is valid or not
-	 * @param to The position to move to
-	 * @return true if the position is on the board, and the tile can be moved to
-	 */
-	public boolean isValidMove(Position to) {
-		boolean valid = true;
-		valid = (board.length > to.x) && valid;
-		valid = (board[to.x].length > to.y) && valid;
+		Boolean isOver = false;
 
-		valid = (board[to.x][to.y].canMoveHere()) && valid;
-		return valid;
-	}
-
-	/**
-	 * Sets a new position on player and tile.
-	 * @param player The player to move
-	 * @param to The position to move to
-	 * @throws InvalidArgumentException If the move is not valid (i.e. not on the board, or the tile cannot be moved to)
-	 */
-	public void movePlayer(Player player, Position to) throws InvalidArgumentException {
-		if (! isValidMove(to)) {
-			String s = "Invalid move for Player " + player.toString();
-			String[] strArr = { s };
-			throw new InvalidArgumentException(strArr);
+		while(!isOver) {
+			System.out.print(currentPlayer().toString() + ": ");
+			IMove move = driver.readNextMove();
+			try {
+				if (!move.isValidFor(board, currentPlayer(), getPlayers())) {
+					throw new InvalidMoveException();
+				}
+				isOver = move.execute(board, currentPlayer(), getPlayers());
+				driver.renderGame();
+				if (isOver) {
+					break;
+				}
+			} catch (InvalidMoveException e) {
+				System.out.println("Invalid move. Try again.");
+				continue;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			players.add(players.remove());
 		}
 
-		board[player.getPosition().x][player.getPosition().y].removePlayer();
-		board[to.x][to.y].moveHere(player);
-		player.setPosition(to);
+		System.out.println("Winner: " + currentPlayer().toString());
+	}
+
+	public Player currentPlayer() {
+		return players.peek();
 	}
 
 	// Getters
 
-	public Player[] getPlayers() {
-		return this.players;
+	public LinkedList<Player> getPlayers() {
+		return (LinkedList<Player>) this.players;
 	}
 
 	public Tile[][] getBoard() {
 		return this.board;
+	}
+
+	// Setters
+
+	public void setDriver(IDriver driver) {
+		this.driver = driver;
 	}
 }

@@ -1,5 +1,7 @@
 package exercise05;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -102,10 +104,33 @@ public class Parser {
 
 		String name = m.group(1);
 		String symbol = m.group(2);
-		int startX = Integer.parseInt(m.group(3)) + 1;
-		int startY = Integer.parseInt(m.group(4)) + 1;
-		String goalPosition = m.group(5);
+		int startX = Integer.parseInt(m.group(3));
+		int startY = Integer.parseInt(m.group(4));
+		char goalPosition = m.group(5).charAt(0);
 
 		return new Player(name, symbol, new Position(startX, startY), goalPosition);
+	}
+
+	public IMove parseMoveFromLine(String l) throws ParseException {
+		Matcher matcher;
+
+		// Match PlayerMove
+		matcher = Pattern.compile("(L|R|U|D)").matcher(l);
+		if (matcher.matches()) {
+			return new PlayerMove(matcher.group(1).charAt(0));
+		}
+
+		// Match PlaceWallMove
+		matcher = Pattern.compile("(\\d) (\\d) (\\d) (\\d)").matcher(l);
+		if (matcher.matches()) {
+			Position pos1 = new Position(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
+			Position pos2 = new Position(Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
+
+			Position[] positions = {pos1, pos2};
+
+			return new PlaceWallMove(positions);
+		}
+
+		throw new ParseException("Invalid move", 2);
 	}
 }

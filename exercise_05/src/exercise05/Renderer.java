@@ -10,7 +10,7 @@ public class Renderer {
 	 * @param game the game to be rendered
 	 * @return a string representation of the game, that was also printed to command line
 	 */
-	public static String render(Game game) {
+	public String render(Game game) {
 		String s = "";
 		System.out.println();
 
@@ -27,7 +27,7 @@ public class Renderer {
 	 * @param row A row of a game board
 	 * @return a string representatino of the row
 	 */
-	public static String convertToString(Tile[] row) {
+	public String convertToString(Tile[] row) {
 		assert(row.length > 0);
 
 		String s = "";

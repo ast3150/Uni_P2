@@ -1,0 +1,3 @@
+7 12
+Player A A 1 1 R
+Player B B 7 12 L

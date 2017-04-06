@@ -16,7 +16,7 @@ public class TileTest {
 		Tile tile1 = new Tile();
 		Tile tile2 = new Tile();
 
-		Player player = new Player("Jane Junit", "J", new Position(2, 1), "R");
+		Player player = new Player("Jane Junit", "J", new Position(2, 1), 'R');
 
 		tile1.moveHere(player);
 		tile2.moveHere(player);
@@ -29,7 +29,43 @@ public class TileTest {
 	}
 
 	@Test
-	public void testCannotMoveToWall() {
-		
+	public void testCanMoveToEmptyTile() {
+		// given
+		Tile tile1 = new Tile();
+
+		// when
+		Boolean canMoveHere = tile1.canMoveHere();
+
+		// then
+		assertTrue(canMoveHere);
 	}
+
+
+	@Test
+	public void testCannotMoveToWall() {
+		// given
+		Tile tile1 = new Tile();
+		tile1.setIsWall(true);
+
+		// when
+		Boolean canMoveHere = tile1.canMoveHere();
+
+		// then
+		assertFalse(canMoveHere);
+	}
+
+	@Test
+	public void testCannotMoveToOccupiedTile() {
+		// given
+		Tile tile1 = new Tile();
+		Player player = new Player("Tim Tester", "T", new Position(1, 1), 'R');
+		tile1.moveHere(player);
+
+		// when
+		Boolean canMoveHere = tile1.canMoveHere();
+
+		// then
+		assertFalse(canMoveHere);
+	}
+
 }
