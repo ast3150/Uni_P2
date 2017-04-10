@@ -1,8 +1,5 @@
 package exercise05;
 
-
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -13,6 +10,7 @@ public class Game {
 	private Queue<Player> players;
 	private Tile[][] board;
 	private IDriver driver;
+	private Boolean isOver = false;
 
 	// Constructors
 
@@ -94,38 +92,57 @@ public class Game {
 
 	// Main Loop
 	public void start() {
-		System.out.println("So it begins!");
 		driver.renderGame();
 
-		Boolean isOver = false;
+		while(!this.isOver()) {
+			takeNextTurn();
+		}
+	}
 
-		while(!isOver) {
-			System.out.print(currentPlayer().toString() + ": ");
-			IMove move = driver.readNextMove();
-			try {
-				if (!move.isValidFor(board, currentPlayer(), getPlayers())) {
-					throw new InvalidMoveException();
-				}
-				isOver = move.execute(board, currentPlayer(), getPlayers());
-				driver.renderGame();
-				if (isOver) {
-					break;
-				}
-			} catch (InvalidMoveException e) {
-				System.out.println("Invalid move. Try again.");
-				continue;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			players.add(players.remove());
+	public void end(Player winner) {
+		System.out.println("\n" + winner.toString() + " has won the game!");
+		System.exit(0);
+	}
+
+	public void takeNextTurn() {
+		IMove move = readNextMove(currentPlayer(), false);
+		execute(move, currentPlayer());
+
+		passTurnToNextPlayer();
+	}
+
+	public IMove readNextMove(Player currentPlayer, Boolean wasPreviousMoveInvalid) {
+		IMove move;
+
+		System.out.print(currentPlayer.toString() + ": ");
+
+		do {
+			move = driver.readNextMove(wasPreviousMoveInvalid);
+			wasPreviousMoveInvalid = true; // If loop runs more than once, this should be true
+		} while (!move.isValidFor(board, currentPlayer, getPlayers()));
+
+		return move;
+	}
+
+	public void execute(IMove move, Player currentPlayer) {
+		try {
+			this.isOver = move.execute(board, currentPlayer, getPlayers());
+		} catch (InvalidMoveException e) {
+			readNextMove(currentPlayer, true);
 		}
 
-		System.out.println("Winner: " + currentPlayer().toString());
+		driver.renderGame();
+
+		if (isOver) {
+			end(currentPlayer);
+		}
 	}
 
 	public Player currentPlayer() {
 		return players.peek();
 	}
+
+	public void passTurnToNextPlayer() { players.add(players.remove()); }
 
 	// Getters
 
@@ -137,6 +154,9 @@ public class Game {
 		return this.board;
 	}
 
+	public Boolean isOver() {
+		return this.isOver;
+	}
 	// Setters
 
 	public void setDriver(IDriver driver) {

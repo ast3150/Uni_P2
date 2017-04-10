@@ -38,12 +38,14 @@ public class Player {
 	public void decrementNumberOfWalls() { numberOfWalls--; }
 
 	// Standard Helpers
-
+	@Override
 	public String toString() {
 		return this.name;
 	}
 
-	public boolean equals(Player otherPlayer) {
+	@Override
+	public boolean equals(Object otherObject) {
+		Player otherPlayer = (Player) otherObject;
 		return this.name.equals(otherPlayer.name) &&
 				this.symbol.equals(otherPlayer.symbol) &&
 				this.position.equals(otherPlayer.position) &&

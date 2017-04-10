@@ -1,7 +1,4 @@
-import exercise05.Game;
-import exercise05.Parser;
-import exercise05.Player;
-import exercise05.Position;
+import exercise05.*;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -125,4 +122,33 @@ public class ParserTest {
 		assertEquals(game.getBoard().length, 5);
 		assertEquals(game.getBoard()[0].length, 5);
 	}
+
+	@Test
+	public void testParsePlayerMoveFromLine() throws ParseException {
+  		// given
+		Parser parser = new Parser();
+
+		// when
+		IMove move = parser.parseMoveFromLine("D");
+
+		// then
+		PlayerMove playerMove = (PlayerMove) move;
+		assertEquals('D', playerMove.getDirection());
+	}
+
+	@Test
+	public void testParsePlaceWallMoveFromLine() throws ParseException {
+		// given
+		Parser parser = new Parser();
+		Position expectedPos1 = new Position(1, 1);
+		Position expectedPos2 = new Position(2, 1);
+		Position[] expectedPositions = {expectedPos1, expectedPos2};
+		// when
+		IMove move = parser.parseMoveFromLine("1 1 2 1");
+
+		// then
+		PlaceWallMove wallMove = (PlaceWallMove) move;
+		assertArrayEquals(expectedPositions, wallMove.getWallPositions());
+	}
+
 }

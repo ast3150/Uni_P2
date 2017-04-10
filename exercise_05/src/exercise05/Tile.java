@@ -69,7 +69,9 @@ public class Tile {
 
 	// Standard Helpers
 
-	public boolean equals(Tile otherTile) {
+	@Override
+	public boolean equals(Object otherObject) {
+		Tile otherTile = (Tile) otherObject;
 		boolean equals = true;
 		equals &= this.isWall == otherTile.isWall;
 		if (this.player != null && otherTile.player != null) {
@@ -79,6 +81,7 @@ public class Tile {
 		return equals;
 	}
 
+	@Override
 	public String toString() {
 		if (player != null) {
 			return player.getSymbol();

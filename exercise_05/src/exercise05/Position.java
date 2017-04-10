@@ -42,7 +42,17 @@ public class Position {
 
 	// Standard Helpers
 
-	public boolean equals(Position otherPosition) {
+	@Override
+	public boolean equals(Object otherObject) {
+		Position otherPosition = (Position) otherObject;
 		return this.x == otherPosition.x && this.y == otherPosition.y;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = 1;
+		result = 31 * result + x;
+		result = 31 * result + y;
+		return result;
 	}
 }

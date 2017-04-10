@@ -7,7 +7,6 @@ import java.util.Scanner;
  * Created by ast on 05.04.17.
  */
 public class Driver implements IDriver{
-	static String CONFIGURATION_PATH = "games/config.txt";
 	static Parser parser = new Parser();
 	static Renderer renderer = new Renderer();
 
@@ -15,9 +14,14 @@ public class Driver implements IDriver{
 
 	public static void main(String[] args) throws Exception {
 		Game game;
+		String configurationPath = "games/config.txt";
+
+		if (args.length > 0) {
+			configurationPath = args[0];
+		}
 
 		try {
-			game = parser.parseGameFromFile(CONFIGURATION_PATH);
+			game = parser.parseGameFromFile(configurationPath);
 		} catch (Exception e) {
 			System.err.println("Configuration error: " + e.getMessage());
 			throw e;
@@ -26,30 +30,28 @@ public class Driver implements IDriver{
 		assert (game != null);
 
 		Driver driver = new Driver(game);
-		System.exit(0);
+		System.exit(1);
 	}
 
-	public Driver(Game game) {
+	public Driver(Game game) throws InvalidMoveException {
 		this.game = game;
 		game.setDriver(this);
 		game.start();
 	}
 
-	// IDriver
-	public IMove readNextMove() {
+	public IMove readNextMove(Boolean wasPreviousMoveInvalid) {
 		IMove m;
 
-		while (true) {
-			String input = readNextLine();
-
-			try {
-				m = parser.parseMoveFromLine(input);
-				break;
-			} catch (ParseException e) {
+		try {
+			if (wasPreviousMoveInvalid) {
 				System.out.print("Invalid move. Try again: ");
-				continue;
 			}
 
+			String input = readNextLine();
+
+			m = parser.parseMoveFromLine(input);
+		} catch (ParseException e) {
+			return readNextMove(true);
 		}
 
 		return m;

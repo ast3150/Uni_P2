@@ -1,7 +1,5 @@
 package exercise05;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -121,7 +119,7 @@ public class Parser {
 		}
 
 		// Match PlaceWallMove
-		matcher = Pattern.compile("(\\d) (\\d) (\\d) (\\d)").matcher(l);
+		matcher = Pattern.compile("(\\d+) (\\d+) (\\d+) (\\d+)").matcher(l);
 		if (matcher.matches()) {
 			Position pos1 = new Position(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
 			Position pos2 = new Position(Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
