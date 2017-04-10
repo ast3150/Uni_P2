@@ -3,10 +3,8 @@ import exercise05.Position;
 import exercise05.Tile;
 import org.junit.Test;
 
-import java.text.ParseException;
-
-import static org.mockito.Mockito.mock;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TileTest {
 

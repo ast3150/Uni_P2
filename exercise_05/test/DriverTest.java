@@ -1,17 +1,10 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import exercise05.*;
-import org.junit.Test;
+import exercise05.Driver;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
-import org.mockito.*;
 
-import java.text.ParseException;
-
-import static org.junit.Assert.*;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by ast on 10.04.17.

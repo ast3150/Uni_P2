@@ -3,7 +3,6 @@ import org.junit.Test;
 
 import java.text.ParseException;
 
-import static org.mockito.Mockito.mock;
 import static org.junit.Assert.*;
 
 public class ParserTest {

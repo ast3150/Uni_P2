@@ -1,13 +1,8 @@
 import exercise05.*;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by ast on 06.04.17.

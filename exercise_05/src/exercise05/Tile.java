@@ -1,7 +1,6 @@
 package exercise05;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A single element of a {@link Game} board.

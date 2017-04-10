@@ -1,13 +1,12 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import exercise05.*;
-import org.junit.Test;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
-import org.mockito.*;
 
 import java.text.ParseException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
