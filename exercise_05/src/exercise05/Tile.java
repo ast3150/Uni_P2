@@ -1,11 +1,19 @@
 package exercise05;
 
+import java.util.ArrayList;
+
 /**
  * A single element of a {@link Game} board.
  */
 public class Tile {
 	private boolean isWall = false;
 	private Player player;
+
+	/**
+	 * A character indicating the position of the tile
+	 * "R" for a tile located on the right edge, similarly "L", "U", "D"
+ 	 */
+	private ArrayList<Character> winningPositions = new ArrayList<Character>();
 
 	// Moves
 
@@ -21,15 +29,21 @@ public class Tile {
 	 * Sets the value of player in the tile.
 	 * @invariant Move should be a valid move
 	 * @param player The player to be moved to this Tile
+	 * @return A boolean indicating whether the player has won the game
 	 */
-	public void moveHere(Player player) {
+	public Boolean moveHere(Player player) {
 		assert canMoveHere();
-
 		this.player = player;
+
+		return isWinningTileFor(player);
 	}
 
 	public void removePlayer() {
 		this.player = null;
+	}
+
+	public Boolean isWinningTileFor(Player player) {
+		return winningPositions.contains(player.getGoalPosition());
 	}
 
 	// Getters
@@ -38,15 +52,25 @@ public class Tile {
 		return player;
 	}
 
+	public boolean isWall() {
+		return isWall;
+	}
+
 	// Setters
 
 	public void setIsWall(Boolean isWall) {
 		this.isWall = isWall;
 	}
 
+	public void addWinningPosition(char pos) {
+		winningPositions.add(pos);
+	}
+
 	// Standard Helpers
 
-	public boolean equals(Tile otherTile) {
+	@Override
+	public boolean equals(Object otherObject) {
+		Tile otherTile = (Tile) otherObject;
 		boolean equals = true;
 		equals &= this.isWall == otherTile.isWall;
 		if (this.player != null && otherTile.player != null) {
@@ -56,9 +80,10 @@ public class Tile {
 		return equals;
 	}
 
+	@Override
 	public String toString() {
 		if (player != null) {
-			return player.toString();
+			return player.getSymbol();
 		}
 
 		if (isWall) {

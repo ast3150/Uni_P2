@@ -4,39 +4,30 @@ public class Player {
 	private String name;
 	private String symbol;
 	private Position position;
-	private String goalPosition;
+	private char goalPosition;
+	private int numberOfWalls = 5;
 
 	// Constructors
 
-	public Player(String name, String symbol, Position startPosition, String goalPosition) {
+	public Player(String name, String symbol, Position startPosition, char goalPosition) {
 		this.name = name;
 		this.symbol = symbol;
 		this.position = startPosition;
 		this.goalPosition = goalPosition;
 	}
 
-	// Moves
-	public Position moveRight() {
-		return new Position(position.x, position.y + 1);
-	}
-
-	public Position moveLeft() {
-		return new Position(position.x, position.y - 1);
-	}
-
-	public Position moveUp() {
-		return new Position(position.x - 1, position.y);
-	}
-
-	public Position moveDown() {
-		return new Position(position.x + 1, position.y);
-	}
-
 	// Getters
+	public String getSymbol() {
+		return symbol;
+	}
 
 	public Position getPosition() {
 		return position;
 	}
+
+	public char getGoalPosition() { return goalPosition; }
+
+	public int getNumberOfWalls() { return numberOfWalls; }
 
 	// Setters
 
@@ -44,17 +35,21 @@ public class Player {
 		this.position = position;
 	}
 
-	// Standard Helpers
+	public void decrementNumberOfWalls() { numberOfWalls--; }
 
-	public boolean equals(Player otherPlayer) {
+	// Standard Helpers
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
+	@Override
+	public boolean equals(Object otherObject) {
+		Player otherPlayer = (Player) otherObject;
 		return this.name.equals(otherPlayer.name) &&
 				this.symbol.equals(otherPlayer.symbol) &&
 				this.position.equals(otherPlayer.position) &&
-				this.goalPosition.equals(otherPlayer.goalPosition);
-	}
-
-	public String toString() {
-		return symbol;
+				this.goalPosition == otherPlayer.goalPosition;
 	}
 
 }

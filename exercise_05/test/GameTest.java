@@ -1,16 +1,22 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import exercise05.Position;
-import exercise05.Game;
-import exercise05.Player;
-import exercise05.Tile;
+import exercise05.*;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
-import static org.junit.Assert.*;
+import java.text.ParseException;
+
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by ast on 30.03.17.
  */
 public class GameTest {
+	@Rule
+	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
 	@Test
 	public void testCreateBoard() {
 		// given
@@ -50,64 +56,47 @@ public class GameTest {
 	}
 
 	@Test
-	public void testMoveToEmptyTileIsValid() {
+	public void testGamePassesTurnAfterValidMove() throws Exception {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), "R");
-		Player[] players = { player };
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		String gameString = "6 6\n" +
+							"Player A A 1 2 D\n" +
+							"Player B B 3 2 U" ;
+		Parser parser = new Parser();
+
+		IDriver driver = mock(Driver.class);
+		when(driver.readNextMove(false)).thenReturn(new PlayerMove('D'));
+
+		Game game = parser.parseGameFromString(gameString);
+		game.setDriver(driver);
 
 		// when
-		Position to = game.getPlayers()[0].moveDown();
+		Player movingPlayer = game.currentPlayer();
+		game.takeNextTurn();
 
 		// then
-		assertTrue(game.isValidMove(to));
+		assertNotEquals(game.currentPlayer(), movingPlayer);
 	}
 
 	@Test
-	public void testMoveToOccuppiedTileIsInvalid() {
+	public void testGameDoesEndOnWinningMove() throws ParseException {
+		// expect
+		exit.expectSystemExitWithStatus(0);
+
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), "R");
-		Player player2 = new Player("Billie Kid", "B", new Position(2, 1), "D");
-		Player[] players = { player, player2 };
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		String gameString = "6 6\n" +
+				"Player A A 5 6 D\n" +
+				"Player B B 3 2 U" ;
+		Parser parser = new Parser();
+
+		IDriver driver = mock(Driver.class);
+		when(driver.readNextMove(false)).thenReturn(new PlayerMove('D'));
+
+		Game game = parser.parseGameFromString(gameString);
+		game.setDriver(driver);
 
 		// when
-		Position to = game.getPlayers()[0].moveDown();
+		game.start();
 
-		// then
-		assertFalse(game.isValidMove(to));
-	}
-
-	@Test
-	public void testMovePlayerRight() throws InvalidArgumentException {
-		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), "R");
-		Player[] players = { player };
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
-
-		// when
-		Position to = game.getPlayers()[0].moveRight();
-		game.movePlayer(game.getPlayers()[0], to);
-
-		// then
-		assertNull(game.getBoard()[1][1].getPlayer());
-		assertNotNull(game.getBoard()[1][2].getPlayer());
-		assertTrue(game.getPlayers()[0].getPosition().equals(new Position(1, 2)));
-	}
-
-	@Test(expected = InvalidArgumentException.class)
-	public void testThrowsOnMoveToWallTile() throws InvalidArgumentException {
-		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), "R");
-		Player[] players = { player };
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
-
-		// when
-		Position to = game.getPlayers()[0].moveUp();
-		game.movePlayer(game.getPlayers()[0], to);
+		// then expectation should hold
 	}
 }
