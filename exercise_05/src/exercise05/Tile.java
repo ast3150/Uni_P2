@@ -1,19 +1,19 @@
 package exercise05;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
  * A single element of a {@link Game} board.
  */
 public class Tile {
-	private boolean isWall = false;
-	private Player player;
+	protected Character playerSymbol;
 
-	/**
-	 * A character indicating the position of the tile
-	 * "R" for a tile located on the right edge, similarly "L", "U", "D"
- 	 */
-	private ArrayList<Character> winningPositions = new ArrayList<Character>();
+	public Tile() {}
+
+	public Tile(Character playerSymbol) {
+		this.playerSymbol = playerSymbol;
+	}
 
 	// Moves
 
@@ -22,74 +22,63 @@ public class Tile {
 	 * @return true if the square is not a wall and currently has no player
 	 */
 	public boolean canMoveHere() {
-		return !this.isWall && this.player == null;
+		return this.playerSymbol == null;
 	}
 
 	/**
 	 * Sets the value of player in the tile.
 	 * @invariant Move should be a valid move
 	 * @param player The player to be moved to this Tile
-	 * @return A boolean indicating whether the player has won the game
 	 */
-	public Boolean moveHere(Player player) {
+	public void moveHere(Player player) {
 		assert canMoveHere();
-		this.player = player;
-
-		return isWinningTileFor(player);
+		this.playerSymbol = player.getSymbol();
 	}
 
 	public void removePlayer() {
-		this.player = null;
+		this.playerSymbol = null;
 	}
 
-	public Boolean isWinningTileFor(Player player) {
-		return winningPositions.contains(player.getGoalPosition());
+	/**
+	 *
+	 * @return A boolean indicating whether the player currently on this tile (if existing) has won the game
+	 */
+	public Boolean isInWinningPosition() {
+		return isWinningTileFor(this.playerSymbol);
+	}
+
+	/**
+	 *
+	 * @param playerSymbol The symbol of the player to check whether he has won or would win by moving to this tile
+	 * @return True if this tile is a winning tile for the player
+	 */
+	public Boolean isWinningTileFor(Character playerSymbol) {
+		return false;
 	}
 
 	// Getters
 
-	public Player getPlayer() {
-		return player;
-	}
-
-	public boolean isWall() {
-		return isWall;
-	}
-
-	// Setters
-
-	public void setIsWall(Boolean isWall) {
-		this.isWall = isWall;
-	}
-
-	public void addWinningPosition(char pos) {
-		winningPositions.add(pos);
-	}
+//	public Player getPlayer() {
+//		return player;
+//	}
 
 	// Standard Helpers
 
 	@Override
 	public boolean equals(Object otherObject) {
-		Tile otherTile = (Tile) otherObject;
-		boolean equals = true;
-		equals &= this.isWall == otherTile.isWall;
-		if (this.player != null && otherTile.player != null) {
-			equals &= this.player.equals(otherTile.player);
+		if (!(otherObject instanceof Tile)) {
+			return false;
 		}
 
-		return equals;
+		if (this.playerSymbol != null && ((Tile)otherObject).playerSymbol != null) {
+			return this.playerSymbol.equals(((Tile)otherObject).playerSymbol);
+		}
+
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		if (player != null) {
-			return player.getSymbol();
-		}
-
-		if (isWall) {
-			return "#";
-		}
-
-		return " ";
+		return playerSymbol != null ? playerSymbol.toString() : " ";
 	}
 }

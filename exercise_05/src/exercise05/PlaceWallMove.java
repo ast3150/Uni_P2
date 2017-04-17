@@ -47,7 +47,7 @@ public class PlaceWallMove implements IMove {
 		}
 
 		for (Position p : wallPositions) {
-			board[p.x][p.y].setIsWall(true);
+			board[p.x][p.y] = new WallTile();
 		}
 
 		currentPlayer.decrementNumberOfWalls();
@@ -73,7 +73,7 @@ public class PlaceWallMove implements IMove {
 		while (!reachablePositions.isEmpty()) {
 			Position pos = reachablePositions.remove();
 
-			if (board[pos.x][pos.y].isWinningTileFor(player)) {
+			if (board[pos.x][pos.y].isWinningTileFor(player.getSymbol())) {
 				// Player can reach at least 1 winning tile, stop searching
 				canReachWinningTile = true;
 				break;
