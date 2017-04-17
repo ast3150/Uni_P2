@@ -1,13 +1,9 @@
 package exercise05;
 
-import javafx.geometry.Pos;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Dictionary;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,7 +71,7 @@ public class Parser {
 			players[i] = parsePlayerFromLine(line);
 
 			for (Position p : playerPositions) {
-				if (board[p.x][p.y].playerSymbol == players[i].getSymbol()) {
+				if (board[p.row][p.col].playerSymbol == players[i].getSymbol()) {
 					players[i].setPosition(p);
 				}
 			}

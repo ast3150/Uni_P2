@@ -4,40 +4,47 @@ package exercise05;
  * Created by ast on 30.03.17.
  */
 public class Position {
-	protected int x;
-	protected int y;
+	protected int row;
+	protected int col;
 
-	public Position(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public Position(int row, int col) {
+		this.row = row;
+		this.col = col;
 	}
 
-	public Position move(char direction ) {
+	public Position move(char direction, int maxRow, int maxCol) throws InvalidMoveException {
 		switch (direction) {
-			case 'L': return moveLeft();
-			case 'R': return moveRight();
-			case 'U': return moveUp();
-			case 'D': return moveDown();
+			case 'L': return moveLeft(maxRow, maxCol);
+			case 'R': return moveRight(maxRow, maxCol);
+			case 'U': return moveUp(maxRow, maxCol);
+			case 'D': return moveDown(maxRow, maxCol);
 			default:
-				System.out.println("Invalid move on Position");
-				return this;
+				throw new InvalidMoveException();
 		}
 	}
 
-	public Position moveRight() {
-		return new Position(x, y + 1);
+	public Position moveRight(int maxRow, int maxCol) throws InvalidMoveException {
+		if (row < 0 || row > maxRow || col < 0 || col >= maxCol)
+			throw new InvalidMoveException();
+		return new Position(row, col + 1);
 	}
 
-	public Position moveLeft() {
-		return new Position(x, y - 1);
+	public Position moveLeft(int maxRow, int maxCol) throws InvalidMoveException {
+		if (row < 0 || row > maxRow || col <= 0 || col > maxCol)
+			throw new InvalidMoveException();
+		return new Position(row, col - 1);
 	}
 
-	public Position moveUp() {
-		return new Position(x - 1, y);
+	public Position moveUp(int maxRow, int maxCol) throws InvalidMoveException {
+		if (row <= 0 || row > maxRow || col < 0 || col > maxCol)
+			throw new InvalidMoveException();
+		return new Position(row - 1, col);
 	}
 
-	public Position moveDown() {
-		return new Position(x + 1, y);
+	public Position moveDown(int maxRow, int maxCol) throws InvalidMoveException {
+		if (row < 0 || row >= maxRow || col < 0 || col > maxCol)
+			throw new InvalidMoveException();
+		return new Position(row + 1, col);
 	}
 
 	// Standard Helpers
@@ -45,14 +52,14 @@ public class Position {
 	@Override
 	public boolean equals(Object otherObject) {
 		Position otherPosition = (Position) otherObject;
-		return this.x == otherPosition.x && this.y == otherPosition.y;
+		return this.row == otherPosition.row && this.col == otherPosition.col;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = 1;
-		result = 31 * result + x;
-		result = 31 * result + y;
+		result = 31 * result + row;
+		result = 31 * result + col;
 		return result;
 	}
 }

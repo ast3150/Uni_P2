@@ -17,8 +17,8 @@ public class ParserTest {
 		parser.parseGameSpecificationFromLine(inputString);
 
 		// then
-		assertEquals(6, parser.board.length);
-		assertEquals(5, parser.board[0].length);
+		assertEquals(5, parser.board.length);
+		assertEquals(6, parser.board[0].length);
 
 		assertEquals(2, parser.players.length);
 		assertEquals(5, parser.numberOfWalls);

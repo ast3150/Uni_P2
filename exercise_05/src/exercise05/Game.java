@@ -39,10 +39,10 @@ public class Game {
 //	 * @return An empty board of type Tile[][]
 //	 */
 //	public Tile[][] generateEmptyBoard(Position size) {
-//		assert(size.x > 0);
+//		assert(size.row > 0);
 //		assert(size.y > 0);
 //
-//		Tile[][] board = new Tile[size.x+2][size.y+2];
+//		Tile[][] board = new Tile[size.row+2][size.y+2];
 //		for (int row = 0; row < board.length; row++) {
 //			for (int col = 0; col<board[row].length; col++) {
 //				board[row][col] = new Tile();
@@ -83,11 +83,11 @@ public class Game {
 //	}
 
 //	public void setWinningTile(Position position, Character winningPlayer) {
-//		board[position.x][position.y] = new WinningTile(winningPlayer);
+//		board[position.row][position.y] = new WinningTile(winningPlayer);
 //	}
 //
 //	public void setWallTile(Position position) {
-//		board[position.x][position.y] = new WallTile();
+//		board[position.row][position.y] = new WallTile();
 //	}
 
 //	/**
@@ -97,7 +97,7 @@ public class Game {
 //	public void setPlayersToInitialPosition(LinkedList<Player> players) {
 //		for (Player p : players) {
 //			Position startPosition = p.getPosition();
-//			board[startPosition.x][startPosition.y];
+//			board[startPosition.row][startPosition.y];
 //		}
 //	}
 
