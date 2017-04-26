@@ -17,6 +17,8 @@ public class PlaceWallMove implements IMove {
 
 		valid &= currentPlayer.getNumberOfWalls() > 0;
 
+		// FIXME: Can produce ArrayIndexOutOfBoundsException
+
 		// Check that tiles to be set to wall are not already are walls or have players on them
 		for (Position p : wallPositions) {
 			valid &= board[p.row][p.col].canMoveHere();

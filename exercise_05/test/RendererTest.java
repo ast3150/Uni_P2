@@ -1,53 +1,61 @@
-//import exercise05.*;
-//import org.junit.Test;
-//
-//import static org.mockito.Mockito.mock;
-//import static org.junit.Assert.*;
-//import static org.mockito.Mockito.when;
-//
-//public class RendererTest {
-//
-//	@Test
-//	public void testConvertToString() {
-//		// given
-//		Player player = mock(Player.class);
-//		when(player.getSymbol()).thenReturn("H");
-//
-//		Tile normalTile = new Tile();
-//		Tile wallTile = new Tile();
-//		wallTile.setIsWall(true);
-//		Tile playerTile = new Tile();
-//		playerTile.moveHere(player);
-//
-//		Tile[] row = {wallTile, playerTile, normalTile, normalTile, wallTile};
-//
-//		Renderer renderer = new Renderer();
-//
-//		// when
-//		String renderedRow = renderer.convertToString(row);
-//
-//		// then
-//		String expectedRow = "#H  #";
-//		assertEquals(expectedRow, renderedRow);
-//	}
-//
-//	@Test
-//	public void testRenderGame() {
-//		// given
-//		Player player1 = new Player( "John Doe", "D", new Position(1, 1), 'R');
-//		Player player2 = new Player( "Louis CK", "L", new Position(3, 3), 'R');
-//		Player[] players = {player1, player2};
-//
-//		Game game = new Game(players, new Position(3, 3));
-//
-//		Renderer renderer = new Renderer();
-//
-//		// when
-//		String renderedGame = renderer.render(game);
-//
-//		// then
-//		String expectedGame = "#####\n#D  #\n#   #\n#  L#\n#####\n";
-//		assert(renderedGame.equals(expectedGame));
-//	}
-//
-//}
+import exercise05.*;
+import org.junit.Test;
+
+import static org.mockito.Mockito.mock;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+
+public class RendererTest {
+
+	@Test
+	public void testConvertToString() {
+		// given
+		Player player = mock(Player.class);
+		when(player.getSymbol()).thenReturn('H');
+
+		Tile normalTile = new Tile();
+		Tile wallTile = new WallTile();
+		Tile playerTile = new Tile('H');
+		playerTile.moveHere(player);
+
+		Tile[] row = {wallTile, playerTile, normalTile, normalTile, wallTile};
+
+		Renderer renderer = new Renderer();
+
+		// when
+		String renderedRow = renderer.convertToString(row);
+
+		// then
+		String expectedRow = "#H  #";
+		assertEquals(expectedRow, renderedRow);
+	}
+
+	@Test
+	public void testRenderGame() {
+		// given
+		Player[] players = {};
+
+		Tile[][] board = Setup.setupEmptyBoard(5);
+
+		for (int i=0; i<board.length; i++) {
+			// Set up top and bottom walls
+			board[0][i] = new WallTile();
+			board[board.length-1][i] = new WallTile();
+		}
+		// Place players
+		board[1][0] = new Tile('D');
+		board[3][3] = new Tile('L');
+
+		Game game = new Game(players, board);
+
+		Renderer renderer = new Renderer();
+
+		// when
+		String renderedGame = renderer.render(game);
+
+		// then
+		String expectedGame = "#####\nD    \n     \n   L \n#####\n";
+		assert(renderedGame.equals(expectedGame));
+	}
+
+}

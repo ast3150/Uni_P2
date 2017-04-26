@@ -130,16 +130,16 @@ public class ParserTest {
 		Tile o = new WinningTile('o');
 		Tile O = new Tile('O');
 		Tile S = new Tile('S');
-		Tile H = new WallTile();
+		Tile W = new WallTile();
 		Tile[][] expectedBoard = {
-				{H, s, s, s, s, s, H},
-				{H, e, e, e, e, e, H},
-				{H, e, e, O, e, e, H},
-				{H, H, H, e, e, e, H},
-				{H, e, e, e, e, e, H},
-				{H, e, e, e, H, H, H},
-				{H, e, e, S, H, H, H},
-				{H, o, o, o, H, H, H}
+				{W, s, s, s, s, s, W},
+				{W, e, e, e, e, e, W},
+				{W, e, e, O, e, e, W},
+				{W, W, W, e, e, e, W},
+				{W, e, e, e, e, e, W},
+				{W, e, e, e, W, W, W},
+				{W, e, e, S, W, W, W},
+				{W, o, o, o, W, W, W}
 		};
 
 		assertArrayEquals(expectedBoard, game.getBoard());

@@ -44,6 +44,7 @@ public class Tile {
 	 * @return A boolean indicating whether the player currently on this tile (if existing) has won the game
 	 */
 	public Boolean isInWinningPosition() {
+		if (this.playerSymbol == null) { return false; }
 		return isWinningTileFor(this.playerSymbol);
 	}
 
