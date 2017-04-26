@@ -17,17 +17,19 @@ public class PlaceWallMove implements IMove {
 
 		valid &= currentPlayer.getNumberOfWalls() > 0;
 
+		// FIXME: Can produce ArrayIndexOutOfBoundsException
+
 		// Check that tiles to be set to wall are not already are walls or have players on them
 		for (Position p : wallPositions) {
-			valid &= board[p.x][p.y].canMoveHere();
+			valid &= board[p.row][p.col].canMoveHere();
 		}
 
 		// Check that all tiles are directly adjacent either vertically or horizontally
 		for (int i = 1; i < wallPositions.length; i++) {
 			Boolean areTilesAdjacent;
 
-			areTilesAdjacent = (abs(wallPositions[i-1].x - wallPositions[i].x) == 1) ^
-					(abs(wallPositions[i-1].y - wallPositions[i].y) == 1);
+			areTilesAdjacent = (abs(wallPositions[i-1].row - wallPositions[i].row) == 1) ^
+					(abs(wallPositions[i-1].col - wallPositions[i].col) == 1);
 
 			valid &= areTilesAdjacent;
 		}
@@ -47,7 +49,7 @@ public class PlaceWallMove implements IMove {
 		}
 
 		for (Position p : wallPositions) {
-			board[p.x][p.y].setIsWall(true);
+			board[p.row][p.col] = new WallTile();
 		}
 
 		currentPlayer.decrementNumberOfWalls();
@@ -73,22 +75,22 @@ public class PlaceWallMove implements IMove {
 		while (!reachablePositions.isEmpty()) {
 			Position pos = reachablePositions.remove();
 
-			if (board[pos.x][pos.y].isWinningTileFor(player)) {
+			if (board[pos.row][pos.col].isWinningTileFor(player.getSymbol())) {
 				// Player can reach at least 1 winning tile, stop searching
 				canReachWinningTile = true;
 				break;
 			}
 
-			Position leftPosition = pos.moveLeft();
-			Position rightPosition = pos.moveRight();
-			Position upPosition = pos.moveUp();
-			Position downPosition = pos.moveDown();
+			ArrayList<Position> positionsToCheck = new ArrayList<>();
 
-			Position[] positionsToCheck = {leftPosition, rightPosition, upPosition, downPosition};
+			try { positionsToCheck.add(pos.moveLeft(board.length - 1, board[0].length - 1)); } catch (InvalidMoveException e) {}
+			try { positionsToCheck.add(pos.moveRight(board.length - 1, board[0].length - 1)); } catch (InvalidMoveException e) {}
+			try { positionsToCheck.add(pos.moveUp(board.length - 1, board[0].length - 1)); } catch (InvalidMoveException e) {}
+			try { positionsToCheck.add(pos.moveDown(board.length - 1, board[0].length - 1)); } catch (InvalidMoveException e) {}
 
 			for (Position positionToCheck : positionsToCheck) {
 				if (!checkedPositions.contains(positionToCheck)) {
-					Tile t = board[positionToCheck.x][positionToCheck.y];
+					Tile t = board[positionToCheck.row][positionToCheck.col];
 					if (t.canMoveHere()) {
 						reachablePositions.add(positionToCheck);
 					}

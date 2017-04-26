@@ -2,30 +2,27 @@ package exercise05;
 
 public class Player {
 	private String name;
-	private String symbol;
+	private Character symbol;
 	private Position position;
-	private char goalPosition;
-	private int numberOfWalls = 5;
+
+	private int numberOfWalls;
 
 	// Constructors
 
-	public Player(String name, String symbol, Position startPosition, char goalPosition) {
+	public Player(String name, Character symbol, int numberOfWalls) {
 		this.name = name;
 		this.symbol = symbol;
-		this.position = startPosition;
-		this.goalPosition = goalPosition;
+		this.numberOfWalls = numberOfWalls;
 	}
 
 	// Getters
-	public String getSymbol() {
+	public Character getSymbol() {
 		return symbol;
 	}
 
 	public Position getPosition() {
 		return position;
 	}
-
-	public char getGoalPosition() { return goalPosition; }
 
 	public int getNumberOfWalls() { return numberOfWalls; }
 
@@ -46,10 +43,16 @@ public class Player {
 	@Override
 	public boolean equals(Object otherObject) {
 		Player otherPlayer = (Player) otherObject;
-		return this.name.equals(otherPlayer.name) &&
-				this.symbol.equals(otherPlayer.symbol) &&
-				this.position.equals(otherPlayer.position) &&
-				this.goalPosition == otherPlayer.goalPosition;
+		boolean equals = true;
+
+		equals &= this.name.equals(otherPlayer.name);
+		equals &= this.symbol.equals(otherPlayer.symbol);
+
+		if (this.position != null && otherPlayer.position != null) {
+			equals &= this.position.equals(otherPlayer.position);
+		}
+
+		return equals;
 	}
 
 }

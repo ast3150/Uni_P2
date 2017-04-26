@@ -1,5 +1,8 @@
 import exercise05.*;
 import org.junit.Test;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.Set;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
@@ -12,16 +15,12 @@ public class PlayerMoveTest {
 	@Test
 	public void testMoveToEmptyTileIsValid() {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), 'R');
-		Player[] players = { player };
+		Game game = Setup.setupGame();
 
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
-
-		PlayerMove move = new PlayerMove('R');
+		PlayerMove move = new PlayerMove('L');
 
 		// when
-		Boolean isValid = move.isValidFor(game.getBoard(), player, game.getPlayers());
+		Boolean isValid = move.isValidFor(game.getBoard(), game.currentPlayer(), game.getPlayers());
 
 		// then
 		assertTrue(isValid);
@@ -30,17 +29,24 @@ public class PlayerMoveTest {
 	@Test
 	public void testMoveToOccupiedTileIsInvalid() {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), 'R');
-		Player player2 = new Player("Billie Kid", "B", new Position(2, 1), 'D');
+		Player player = new Player("Joe Jackson", 'J', 4);
+		Player player2 = new Player("Billie Kid", 'B', 4);
 		Player[] players = { player, player2 };
 
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		player.setPosition(new Position(0, 0));
+		player2.setPosition(new Position(1, 0));
+
+		Tile[][] board = Setup.setupEmptyBoard(3);
+
+		board[0][0] = new Tile('J');
+		board[1][0] = new Tile('B');
+
+		Game game = new Game(players, board);
 
 		PlayerMove move = new PlayerMove('D');
 
 		// when
-		Boolean isValid = move.isValidFor(game.getBoard(), player, game.getPlayers());
+		Boolean isValid = move.isValidFor(game.getBoard(), game.currentPlayer(), game.getPlayers());
 
 		// then
 		assertFalse(isValid);
@@ -49,35 +55,33 @@ public class PlayerMoveTest {
 	@Test
 	public void testMovePlayerRight() throws InvalidMoveException {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), 'R');
-		Player[] players = { player };
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		Game game = Setup.setupGame();
+
+		game.currentPlayer().setPosition(new Position(1, 1));
+		game.getBoard()[1][1] = new Tile('F');
 
 		PlayerMove move = new PlayerMove('R');
 
 		// when
-		Boolean isValid = move.isValidFor(game.getBoard(), player, game.getPlayers());
-		move.execute(game.getBoard(), player, game.getPlayers());
+		Boolean isValid = move.isValidFor(game.getBoard(), game.currentPlayer(), game.getPlayers());
+		move.execute(game.getBoard(), game.currentPlayer(), game.getPlayers());
 
 		// then
-		assertNull(game.getBoard()[1][1].getPlayer());
-		assertNotNull(game.getBoard()[1][2].getPlayer());
+		assertEquals(" ", game.getBoard()[1][1].toString());
+		assertTrue(game.getBoard()[1][1].canMoveHere());
+		assertEquals("F", game.getBoard()[1][2].toString());
 		assertTrue(game.currentPlayer().getPosition().equals(new Position(1, 2)));
 	}
 
 	@Test(expected = InvalidMoveException.class)
 	public void testThrowsOnInvalidMove() throws InvalidMoveException {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), 'R');
-		Player[] players = { player };
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		Game game = Setup.setupGame();
 
 		PlayerMove move = new PlayerMove('M');
 
 		// when
-		Boolean hasWon = move.execute(game.getBoard(), player, game.getPlayers());
+		Boolean hasWon = move.execute(game.getBoard(), game.currentPlayer(), game.getPlayers());
 
 		// then should throw InvalidMoveException
 	}
@@ -85,15 +89,16 @@ public class PlayerMoveTest {
 	@Test(expected = InvalidMoveException.class)
 	public void testThrowsOnMoveToWallTile() throws InvalidMoveException {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), 'R');
-		Player[] players = { player };
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		Game game = Setup.setupGame();
+
+		game.getBoard()[0][1] = new WallTile();
+		game.getBoard()[1][1] = new Tile('F');
+		game.currentPlayer().setPosition(new Position(1, 1));
 
 		PlayerMove move = new PlayerMove('U');
 
 		// when
-		Boolean hasWon = move.execute(game.getBoard(), player, game.getPlayers());
+		Boolean hasWon = move.execute(game.getBoard(), game.currentPlayer(), game.getPlayers());
 
 		// then should throw InvalidMoveException
 	}
@@ -101,12 +106,18 @@ public class PlayerMoveTest {
 	@Test(expected = InvalidMoveException.class)
 	public void testThrowsOnMoveToOccupiedTile() throws InvalidMoveException {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 1), 'R');
-		Player player2 = new Player("Billie Kid", "B", new Position(2, 1), 'D');
+		Player player = new Player("Joe Jackson", 'J', 4);
+		player.setPosition(new Position(0, 1));
+		Player player2 = new Player("Billie Kid", 'B', 4);
+		player2.setPosition(new Position(1, 1));
 		Player[] players = { player, player2 };
 
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		Tile[][] board = Setup.setupEmptyBoard(3);
+
+		board[0][1] = new Tile('J');
+		board[1][1] = new Tile('B');
+
+		Game game = new Game(players, board);
 
 		PlayerMove move = new PlayerMove('D');
 
@@ -119,19 +130,39 @@ public class PlayerMoveTest {
 	@Test
 	public void testDetectsPlayerHasWon() throws InvalidMoveException {
 		// given
-		Player player = new Player("Joe Jackson", "J", new Position(1, 2), 'L');
-		Player player2 = new Player("Billie Kid", "B", new Position(2, 1), 'D');
+		Player player = new Player("Joe Jackson", 'J', 4);
+		player.setPosition(new Position(0, 1));
+		Player player2 = new Player("Billie Kid", 'B', 4);
+		player2.setPosition(new Position(1, 1));
 		Player[] players = { player, player2 };
 
-		Position boardSize = new Position(3, 3);
-		Game game = new Game(players, boardSize);
+		Tile[][] board = Setup.setupEmptyBoard(3);
+
+		board[0][0] = new WinningTile('J');
+		board[0][1] = new Tile('J');
+		board[1][1] = new Tile('B');
+
+		Game game = new Game(players, board);
 
 		PlayerMove move = new PlayerMove('L');
 
 		// when
-		Boolean hasWon = move.execute(game.getBoard(), player, game.getPlayers());
+		Boolean hasWon = move.execute(game.getBoard(), game.currentPlayer(), game.getPlayers());
 
 		// then
 		assertTrue(hasWon);
+	}
+
+	@Test(expected = InvalidMoveException.class)
+	public void testThrowsOnMoveOffBoard() throws Exception {
+		// given
+		Game game = Setup.setupGame();
+
+		PlayerMove move = new PlayerMove('R');
+
+		// when
+		Boolean hasWon = move.execute(game.getBoard(), game.currentPlayer(), game.getPlayers());
+
+		// then should throw exception
 	}
 }

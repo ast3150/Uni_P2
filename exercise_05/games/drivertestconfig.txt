@@ -1,3 +1,6 @@
-3 3
-Player A A 1 2 D
-Player B B 3 2 U
+3 3 2 2
+ A
+
+ B
+A Player A
+B Player B

@@ -14,7 +14,7 @@ public class TileTest {
 		Tile tile1 = new Tile();
 		Tile tile2 = new Tile();
 
-		Player player = new Player("Jane Junit", "J", new Position(2, 1), 'R');
+		Player player = new Player("Jane Junit", 'J', 1);
 
 		tile1.moveHere(player);
 		tile2.moveHere(player);
@@ -38,12 +38,12 @@ public class TileTest {
 		assertTrue(canMoveHere);
 	}
 
-
 	@Test
-	public void testCannotMoveToWall() {
+	public void testCannotMoveToOccupiedTile() {
 		// given
 		Tile tile1 = new Tile();
-		tile1.setIsWall(true);
+		Player player = new Player("Tim Tester", 'T', 1);
+		tile1.moveHere(player);
 
 		// when
 		Boolean canMoveHere = tile1.canMoveHere();
@@ -53,17 +53,19 @@ public class TileTest {
 	}
 
 	@Test
-	public void testCannotMoveToOccupiedTile() {
+	public void testIsNotInWinningPosition() {
 		// given
 		Tile tile1 = new Tile();
-		Player player = new Player("Tim Tester", "T", new Position(1, 1), 'R');
+		Player player = new Player("Tim Tester", 'T', 1);
 		tile1.moveHere(player);
 
 		// when
-		Boolean canMoveHere = tile1.canMoveHere();
+		Boolean isWinningPosition = tile1.isInWinningPosition();
+		Boolean isWinningTileForPlayer = tile1.isWinningTileFor('T');
 
 		// then
-		assertFalse(canMoveHere);
+		assertFalse(isWinningPosition);
+		assertFalse(isWinningTileForPlayer);
 	}
 
 }
