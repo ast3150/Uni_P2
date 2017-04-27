@@ -22,7 +22,7 @@ public class DriverTest {
 		exit.expectSystemExitWithStatus(0);
 
 		// given
-		systemInMock.provideLines("L", "R", "D", "U", "D");
+		systemInMock.provideLines("R", "L", "D", "U", "D");
 
 		// when
 		String[] args = {"games/drivertestconfig.txt"};

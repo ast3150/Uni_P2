@@ -5,6 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -159,6 +160,23 @@ public class PlaceWallMoveTest {
 
 	@Test
 	public void testPlacingWallDecrementsPlayerNumberOfWalls() throws Exception {
-		throw new NotImplementedException();
+		// Given
+		Game game = Setup.setupGame();
+
+		Position pos1 = new Position(0, 1);
+		Position pos2 = new Position(0, 2);
+		Position[] placeWallPositions = {pos1, pos2};
+
+		PlaceWallMove move = new PlaceWallMove(placeWallPositions);
+
+		int wallsBeforeMove = game.currentPlayer().getNumberOfWalls();
+
+		// When
+		move.execute(game.getBoard(), game.currentPlayer(), game.getPlayers());
+
+		int wallsAfterMove = game.currentPlayer().getNumberOfWalls();
+
+		// Then
+		assertEquals(--wallsBeforeMove, wallsAfterMove);
 	}
 }

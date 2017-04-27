@@ -17,8 +17,6 @@ public class Game {
 	public Game(Player[] players, Tile[][] board) {
 		this.players = createPlayerQueue(players);
 		this.board = board;
-
-//		setPlayersToInitialPosition((LinkedList<Player>) this.players);
 	}
 
 	public Queue<Player> createPlayerQueue(Player[] players) {
@@ -30,76 +28,6 @@ public class Game {
 
 		return q;
 	}
-
-	// Board Setup
-
-//	/**
-//	 * Generates an empty board
-//	 * @param size the complete size of the board
-//	 * @return An empty board of type Tile[][]
-//	 */
-//	public Tile[][] generateEmptyBoard(Position size) {
-//		assert(size.row > 0);
-//		assert(size.y > 0);
-//
-//		Tile[][] board = new Tile[size.row+2][size.y+2];
-//		for (int row = 0; row < board.length; row++) {
-//			for (int col = 0; col<board[row].length; col++) {
-//				board[row][col] = new Tile();
-//			}
-//		}
-//
-//		// Border walls
-//
-//		// Set up top wall
-//		for (Tile t : board[0]) {
-//			t.setIsWall(true);
-//		}
-//
-//		// Set up bottom wall
-//		for (Tile t : board[board.length-1]) {
-//			t.setIsWall(true);
-//		}
-//
-//		// Set up left and right walls, left and right goal squares
-//		for (Tile[] row : board) {
-//			row[0].setIsWall(true);
-//			row[1].addWinningPosition('L');
-//			row[row.length-2].addWinningPosition('R');
-//			row[row.length-1].setIsWall(true);
-//		}
-//
-//		// Set up top winning squares
-//		for (Tile t : board[1]) {
-//			t.addWinningPosition('U');
-//		}
-//
-//		// Set up bottom winning squares
-//		for (Tile t : board[board.length-2]) {
-//			t.addWinningPosition('D');
-//		}
-//
-//		return board;
-//	}
-
-//	public void setWinningTile(Position position, Character winningPlayer) {
-//		board[position.row][position.y] = new WinningTile(winningPlayer);
-//	}
-//
-//	public void setWallTile(Position position) {
-//		board[position.row][position.y] = new WallTile();
-//	}
-
-//	/**
-//	 * Moves the players to their initial position. Should only be used for setting up a new Game.
-//	 * @param players The players to be placed on the board. Need to have currentPosition attribute set.
-//	 */
-//	public void setPlayersToInitialPosition(LinkedList<Player> players) {
-//		for (Player p : players) {
-//			Position startPosition = p.getPosition();
-//			board[startPosition.row][startPosition.y];
-//		}
-//	}
 
 	// Main Loop
 	public void start() {
@@ -168,6 +96,7 @@ public class Game {
 	public Boolean isOver() {
 		return this.isOver;
 	}
+
 	// Setters
 
 	public void setDriver(IDriver driver) {

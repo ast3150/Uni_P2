@@ -57,12 +57,6 @@ public class Tile {
 		return false;
 	}
 
-	// Getters
-
-//	public Player getPlayer() {
-//		return player;
-//	}
-
 	// Standard Helpers
 
 	@Override
