@@ -91,13 +91,11 @@ public class PlaceWallMove implements IMove {
 			for (Position positionToCheck : positionsToCheck) {
 				if (!checkedPositions.contains(positionToCheck)) {
 					Tile t = board[positionToCheck.row][positionToCheck.col];
-					if (t.canMoveHere()) {
+					if (! (t instanceof WallTile)) {
 						reachablePositions.add(positionToCheck);
 					}
 					checkedPositions.add(positionToCheck);
 				}
-
-
 			}
 		}
 

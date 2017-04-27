@@ -109,7 +109,7 @@ public class ParserTest {
 	public void testParseGameFromFile() throws ParseException {
 		// given
 		Parser parser = new Parser();
-		String filePath = "games/game3.txt";
+		String filePath = "games/game2.txt";
 
 		// when
 		Game game = parser.parseGameFromFile(filePath);

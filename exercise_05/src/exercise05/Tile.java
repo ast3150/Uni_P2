@@ -11,6 +11,8 @@ public class Tile {
 
 	public Tile() {}
 
+	public Tile(Tile another) {}
+
 	public Tile(Character playerSymbol) {
 		this.playerSymbol = playerSymbol;
 	}
