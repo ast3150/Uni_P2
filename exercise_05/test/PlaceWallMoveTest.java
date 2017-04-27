@@ -179,4 +179,29 @@ public class PlaceWallMoveTest {
 		// Then
 		assertEquals(--wallsBeforeMove, wallsAfterMove);
 	}
+
+	@Test
+	public void testPlacingCutOffWallIsValidIfDoesNotBlock() throws Exception {
+		// Given
+		Game game = Setup.setupGame();
+
+		game.getBoard()[0][2] = game.getBoard()[2][2];
+		game.getBoard()[2][2] = new Tile();
+		game.currentPlayer().setPosition(new Position(0, 2));
+
+		game.getBoard()[1][1] = new WallTile();
+		game.getBoard()[1][2] = new WallTile();
+
+		Position pos1 = new Position(1, 0);
+		Position pos2 = new Position(2, 0);
+		Position[] placeWallPositions = {pos1, pos2};
+
+		PlaceWallMove move = new PlaceWallMove(placeWallPositions);
+
+		// When
+		Boolean isValid = move.isValidFor(game.getBoard(), game.currentPlayer(), game.getPlayers());
+
+		// Then
+		assertTrue(isValid);
+	}
 }

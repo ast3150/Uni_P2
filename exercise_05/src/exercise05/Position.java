@@ -1,6 +1,8 @@
 package exercise05;
 
 /**
+ * Represents a 2D coordinate
+ *
  * Created by ast on 30.03.17.
  */
 public class Position {
@@ -12,6 +14,14 @@ public class Position {
 		this.col = col;
 	}
 
+	/**
+	 * Moves the position in the indicated direction, if valid
+	 * @param direction A char indicating the direction to move in
+	 * @param maxRow The maximum row, normally limited by the bounds of the game board
+	 * @param maxCol The maximum column, normally limited by the bounds of the game board
+	 * @return The new position
+	 * @throws InvalidMoveException If the move would exceed the maxRow or maxCol bounds
+	 */
 	public Position move(char direction, int maxRow, int maxCol) throws InvalidMoveException {
 		switch (direction) {
 			case 'L': return moveLeft(maxRow, maxCol);

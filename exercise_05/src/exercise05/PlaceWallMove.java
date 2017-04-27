@@ -4,6 +4,11 @@ import java.util.*;
 
 import static java.lang.Math.abs;
 
+/**
+ * {@inheritDoc}
+ *
+ * Places a wall on the game board that cannot be passed by players.
+ */
 public class PlaceWallMove implements IMove {
 	Position[] wallPositions;
 
@@ -11,6 +16,12 @@ public class PlaceWallMove implements IMove {
 		this.wallPositions = wallPositions;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Performs additional checks to make sure that a Wall consists only of adjacent tiles and
+	 * does not block any players from reaching at least one goal tile.
+	 */
 	@Override
 	public Boolean isValidFor(Tile[][] board, Player currentPlayer, LinkedList<Player> players) {
 		Boolean valid = true;
@@ -47,6 +58,12 @@ public class PlaceWallMove implements IMove {
 		return valid;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Also decreases the player's number of walls;
+	 * @return False, since a player should not win the game just by placing a wall
+	 */
 	@Override
 	public Boolean execute(Tile[][] board, Player currentPlayer, LinkedList<Player> players) throws InvalidMoveException {
 		if (! isValidFor(board, currentPlayer, players)) {
@@ -59,9 +76,17 @@ public class PlaceWallMove implements IMove {
 
 		currentPlayer.decrementNumberOfWalls();
 
-		return false; // Players should never win just by placing a wall
+		return false;
 	}
 
+	/**
+	 * Checks that a player can reach at least one winning tile.
+	 * Uses Breadth First Search algorithm, be aware of the possible performance impact for large boards
+	 *
+	 * @param board The board to check on
+	 * @param player The player to check
+	 * @return True if there exists a path to at least one winning tile
+	 */
 	private Boolean canReachWinningTile(Tile[][] board, Player player) {
 		Boolean canReachWinningTile = false;
 
