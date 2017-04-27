@@ -17,7 +17,12 @@ public class PlaceWallMove implements IMove {
 
 		valid &= currentPlayer.getNumberOfWalls() > 0;
 
-		// FIXME: Can produce ArrayIndexOutOfBoundsException
+		//Checks if input is in range
+		for(Position p : wallPositions){
+			if(!(p.row < board.length) && (p.col < board[0].length)){
+				return false;
+			}
+		}
 
 		// Check that tiles to be set to wall are not already are walls or have players on them
 		for (Position p : wallPositions) {
@@ -28,8 +33,8 @@ public class PlaceWallMove implements IMove {
 		for (int i = 1; i < wallPositions.length; i++) {
 			Boolean areTilesAdjacent;
 
-			areTilesAdjacent = (abs(wallPositions[i-1].row - wallPositions[i].row) == 1) ^
-					(abs(wallPositions[i-1].col - wallPositions[i].col) == 1);
+			areTilesAdjacent = (abs(wallPositions[i - 1].row - wallPositions[i].row) == 1) ^
+					(abs(wallPositions[i - 1].col - wallPositions[i].col) == 1);
 
 			valid &= areTilesAdjacent;
 		}
