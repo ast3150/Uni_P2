@@ -5,6 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -159,6 +160,48 @@ public class PlaceWallMoveTest {
 
 	@Test
 	public void testPlacingWallDecrementsPlayerNumberOfWalls() throws Exception {
-		throw new NotImplementedException();
+		// Given
+		Game game = Setup.setupGame();
+
+		Position pos1 = new Position(0, 1);
+		Position pos2 = new Position(0, 2);
+		Position[] placeWallPositions = {pos1, pos2};
+
+		PlaceWallMove move = new PlaceWallMove(placeWallPositions);
+
+		int wallsBeforeMove = game.currentPlayer().getNumberOfWalls();
+
+		// When
+		move.execute(game.getBoard(), game.currentPlayer(), game.getPlayers());
+
+		int wallsAfterMove = game.currentPlayer().getNumberOfWalls();
+
+		// Then
+		assertEquals(--wallsBeforeMove, wallsAfterMove);
+	}
+
+	@Test
+	public void testPlacingCutOffWallIsValidIfDoesNotBlock() throws Exception {
+		// Given
+		Game game = Setup.setupGame();
+
+		game.getBoard()[0][2] = game.getBoard()[2][2];
+		game.getBoard()[2][2] = new Tile();
+		game.currentPlayer().setPosition(new Position(0, 2));
+
+		game.getBoard()[1][1] = new WallTile();
+		game.getBoard()[1][2] = new WallTile();
+
+		Position pos1 = new Position(1, 0);
+		Position pos2 = new Position(2, 0);
+		Position[] placeWallPositions = {pos1, pos2};
+
+		PlaceWallMove move = new PlaceWallMove(placeWallPositions);
+
+		// When
+		Boolean isValid = move.isValidFor(game.getBoard(), game.currentPlayer(), game.getPlayers());
+
+		// Then
+		assertTrue(isValid);
 	}
 }

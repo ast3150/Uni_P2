@@ -11,6 +11,8 @@ public class Tile {
 
 	public Tile() {}
 
+	public Tile(Tile another) {}
+
 	public Tile(Character playerSymbol) {
 		this.playerSymbol = playerSymbol;
 	}
@@ -56,12 +58,6 @@ public class Tile {
 	public Boolean isWinningTileFor(Character playerSymbol) {
 		return false;
 	}
-
-	// Getters
-
-//	public Player getPlayer() {
-//		return player;
-//	}
 
 	// Standard Helpers
 

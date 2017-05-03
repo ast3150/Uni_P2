@@ -101,7 +101,16 @@ public class Parser {
 		this.numberOfWalls = Integer.parseInt(m.group(4));
 	}
 
+	/**
+	 * Parses a board specification from a line of input, to obtain the position and type
+	 * of tiles and players. Applies the read values to the board.
+	 * @param l A single line String
+	 * @param row The index of the row currently being parsed, used to write to the correct board row
+	 * @throws ParseException If the input can not be read
+	 */
 	private void parseBoardSpecificationFromLine(String l, int row) throws ParseException {
+		assert(board.length >= row);
+
 		Matcher m = Pattern.compile("(#| |[a-zA-Z]){" + this.board[row].length + "}").matcher(l);
 		if (! m.matches()) {
 			throw new ParseException("Board specification could not be parsed", 4);
@@ -114,6 +123,14 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Matches the input character to the specified type of Tile. Adds a player to the tile if specified.
+	 * @param c A single game board specification character
+	 * @param row The index of the row currently being parsed, used to set the correct position to the player
+	 * @param col The index of the column currently being parsed, used to set the correct position to the player
+	 * @return The tile matching the specified input
+	 * @throws ParseException If the input can not be read
+	 */
 	private Tile getTileForBoardSpecificationCharacter(Character c, int row, int col) throws ParseException {
 		if (c == ' ')
 			return new Tile();
@@ -133,7 +150,7 @@ public class Parser {
 	}
 
 	/**
-	 * Parses a player from an input String
+	 * Parses a player specification from an input String
 	 * @param l A single line String
 	 * @return A {@link Player} representing the state that was read from the input string.
 	 * @throws ParseException If the input can not be read
@@ -154,6 +171,12 @@ public class Parser {
 
 	// Moves
 
+	/**
+	 * Parses a move from an input String
+	 * @param l A single line String
+	 * @return The move matching the specified actions, if possible
+	 * @throws ParseException If the input can not be read
+	 */
 	public IMove parseMoveFromLine(String l) throws ParseException {
 		Matcher matcher;
 
@@ -172,6 +195,13 @@ public class Parser {
 		throw new ParseException("Invalid move", 2);
 	}
 
+	/**
+	 * Helper method to parse PlaceWallMoves
+	 * @param matcher A pattern matcher that matches the specification for a PlaceWallMove,
+	 *                   used to access the groups of the matcher input.
+	 * @return The specified PlaceWallMove
+	 * @throws ParseException If the input can not be read
+	 */
 	public PlaceWallMove parsePlaceWallMoveFromMatcher(Matcher matcher) throws ParseException {
 		Position pos1 = new Position(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
 		Position pos2 = new Position(Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));

@@ -3,10 +3,7 @@ package exercise05;
 import java.text.ParseException;
 import java.util.Scanner;
 
-/**
- * Created by ast on 05.04.17.
- */
-public class Driver implements IDriver{
+public class Driver implements IDriver {
 	static Parser parser = new Parser();
 	static Renderer renderer = new Renderer();
 
@@ -30,7 +27,7 @@ public class Driver implements IDriver{
 		assert (game != null);
 
 		Driver driver = new Driver(game);
-		System.exit(1);
+		System.exit(1); // Normally exits from Game.end
 	}
 
 	public Driver(Game game) throws InvalidMoveException {
@@ -39,8 +36,14 @@ public class Driver implements IDriver{
 		game.start();
 	}
 
+	public boolean invariant() {
+		return game != null;
+	}
+
 	public IMove readNextMove(Boolean wasPreviousMoveInvalid) {
 		IMove m;
+
+		assert(invariant());
 
 		try {
 			if (wasPreviousMoveInvalid) {
@@ -62,6 +65,7 @@ public class Driver implements IDriver{
 	}
 
 	public void renderGame(){
+		assert(invariant());
 		renderer.render(game);
 	}
 }

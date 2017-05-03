@@ -16,7 +16,6 @@ public class RendererTest {
 		Tile normalTile = new Tile();
 		Tile wallTile = new WallTile();
 		Tile playerTile = new Tile('H');
-		playerTile.moveHere(player);
 
 		Tile[] row = {wallTile, playerTile, normalTile, normalTile, wallTile};
 
