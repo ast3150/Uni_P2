@@ -8,7 +8,7 @@ Week  Status
 04    ok
 05    wow
 06    wow
-07
+07    wow
 08
 09
 10
