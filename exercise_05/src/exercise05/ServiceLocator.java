@@ -19,7 +19,7 @@ public abstract class ServiceLocator {
         return new DefaultServiceLocator();
     }
 
-    public static void setServiceLocator (ServiceLocator serviceLocator){
+    public static void setServiceLocator (ServiceLocator serviceLocator) {
         instance = serviceLocator;
     }
 

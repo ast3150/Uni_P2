@@ -1,6 +1,7 @@
 import exercise05.*;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 import java.text.ParseException;

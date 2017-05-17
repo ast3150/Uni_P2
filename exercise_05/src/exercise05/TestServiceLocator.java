@@ -5,7 +5,7 @@ package exercise05;
  */
 public class TestServiceLocator extends ServiceLocator {
     Game game;
-    Renderer renderer;
+    IRenderer renderer = new SilentRenderer();
 
     //TODO
     public Game getGame(){
