@@ -1,4 +1,7 @@
 import exercise05.Driver;
+import exercise05.IRenderer;
+import exercise05.ServiceLocator;
+import exercise05.TestServiceLocator;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
@@ -26,8 +29,10 @@ public class DriverTest {
 
 		// when
 		String[] args = {"games/drivertestconfig.txt"};
+		//TODO makes the board silent but not the players
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
 		Driver.main(args);
-
 		// then expectation should hold
 	}
 }

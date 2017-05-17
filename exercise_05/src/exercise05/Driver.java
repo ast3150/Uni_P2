@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class Driver implements IDriver {
 	static Parser parser = new Parser();
-	static Renderer renderer = new Renderer();
-
 	Game game;
 
 	public static void main(String[] args) throws Exception {
@@ -65,6 +63,8 @@ public class Driver implements IDriver {
 	}
 
 	public void renderGame(){
+		IRenderer renderer;
+		renderer = ServiceLocator.instance().getRenderer();
 		assert(invariant());
 		renderer.render(game);
 	}

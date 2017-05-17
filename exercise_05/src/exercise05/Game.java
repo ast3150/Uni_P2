@@ -18,6 +18,9 @@ public class Game {
 	public Game(Player[] players, Tile[][] board) {
 		this.players = createPlayerQueue(players);
 		this.board = board;
+		/* TODO
+		this.board = ServiceLocator.instance().getBoard();
+		*/
 	}
 
 	/**

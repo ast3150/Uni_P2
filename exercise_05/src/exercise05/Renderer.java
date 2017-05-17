@@ -3,13 +3,14 @@ package exercise05;
 /**
  * Renders a {@link Game} object.
  */
-public class Renderer {
+public class Renderer implements IRenderer{
 
 	/**
 	 * Prints and returns the current state of a {@link Game}
 	 * @param game the game to be rendered
 	 * @return a string representation of the game, that was also printed to command line
 	 */
+	@Override
 	public String render(Game game) {
 		String s = "";
 		System.out.println();
