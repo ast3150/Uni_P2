@@ -54,6 +54,7 @@ public class Game {
 	 * @param winner The winner, will be passed to output to inform the players
 	 */
 	public void end(Player winner) {
+		//TODO silent test
 		System.out.println("\n" + winner.toString() + " has won the game!");
 		System.exit(0);
 	}
@@ -78,6 +79,7 @@ public class Game {
 	public IMove readNextMove(Player currentPlayer, Boolean wasPreviousMoveInvalid) {
 		IMove move;
 
+		//TODO silent test
 		System.out.print(currentPlayer.toString() + ": ");
 
 		do {
