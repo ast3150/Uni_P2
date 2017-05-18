@@ -4,7 +4,7 @@
 We used the examples from the Exercise file and the pool hour. Our service locator uses the DefaultServiceLocator as the name says for the default game and in test case the TestServiceLocator. For having two different Renderer we implemented an Interface IRenderer.
 
 ##task 9.2
-We created a new Parser Interface to avoid dependencies in the Driver class.
+As requested in the task we added constructors to inject the dependencies rather than using the ServiceLocator.
 
 ##task 9.3
 We used the service locator and implemented a new method getPrintStream() wich sets the PrintStream to System.out in the game case.
