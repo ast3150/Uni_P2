@@ -7,7 +7,8 @@ import java.io.PrintStream;
  */
 public class DefaultServiceLocator extends ServiceLocator {
     Game game;
-    Renderer renderer = new Renderer();
+    IRenderer renderer = new Renderer();
+    IParser parser = new Parser();
 
     //TODO
     public Game getGame(){
@@ -16,6 +17,10 @@ public class DefaultServiceLocator extends ServiceLocator {
 
     public IRenderer getRenderer(){
         return renderer;
+    }
+
+    public IParser getParser() {
+        return parser;
     }
 
     public PrintStream getPrintStream() {

@@ -11,6 +11,7 @@ import java.io.PrintStream;
 public class TestServiceLocator extends ServiceLocator {
     Game game;
     IRenderer renderer = new Renderer();
+    IParser parser = new Parser();
 
     //TODO
     public Game getGame(){
@@ -19,6 +20,10 @@ public class TestServiceLocator extends ServiceLocator {
 
     public IRenderer getRenderer(){
         return renderer;
+    }
+
+    public IParser getParser() {
+        return parser;
     }
 
     public PrintStream getPrintStream() {

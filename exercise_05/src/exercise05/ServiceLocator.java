@@ -6,7 +6,6 @@ import java.io.PrintStream;
  * Created by samuel on 16.05.17.
  */
 public abstract class ServiceLocator {
-    //TODO
     private static ServiceLocator instance;
     protected ServiceLocator() {}
 
@@ -25,9 +24,9 @@ public abstract class ServiceLocator {
         instance = serviceLocator;
     }
 
-    public abstract Game getGame();
-
     public abstract IRenderer getRenderer();
+
+    public abstract IParser getParser();
 
     public abstract PrintStream getPrintStream();
     //...

@@ -14,7 +14,7 @@ import static java.nio.file.Paths.get;
 /**
  * Parses a Quoridor file specification and creates a {@link Game} instance.
  */
-public class Parser {
+public class Parser implements IParser {
 	Pattern lowercaseCharPattern = Pattern.compile("[a-z]");
 	Pattern uppercaseCharPattern = Pattern.compile("[A-Z]");
 
@@ -23,12 +23,7 @@ public class Parser {
 	public ArrayList<Position> playerPositions = new ArrayList<>();
 	public int numberOfWalls = 0;
 
-	/**
-	 * Reads input from a text file and sets up a {@link Game} object based on the input.
-	 * @param path A valid file path
-	 * @return The created Game object
-	 * @throws ParseException If the file does not exist or the input can not be read.
-	 */
+	@Override
 	public Game parseGameFromFile(String path) throws ParseException {
 		String stringFromFile = "";
 		try {
@@ -45,12 +40,7 @@ public class Parser {
 		return parseGameFromString(stringFromFile);
 	}
 
-	/**
-	 * Creates a game object from a multiline input string
-	 * @param s The string to parse and generate the game from
-	 * @return The created Game object
-	 * @throws ParseException If the input can not be read.
-	 */
+	@Override
 	public Game parseGameFromString(String s) throws ParseException {
 		Scanner scanner = new Scanner(s);
 		String line;
@@ -81,13 +71,7 @@ public class Parser {
 	}
 
 
-	/**
-	 * Parses the first line of an input String, to obtain the board size,
-	 * number of players and number of walls for each player.
-	 * Sets the corresponding variables to be processed in other methods.
-	 * @param l A single line String
-	 * @throws ParseException If the input can not be read
-	 */
+	@Override
 	public void parseGameSpecificationFromLine(String l) throws ParseException {
 		Matcher m = Pattern.compile("([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)").matcher(l);
 		if (! m.matches()) {
@@ -149,12 +133,7 @@ public class Parser {
 		throw new ParseException("Board specification could not be parsed", 5);
 	}
 
-	/**
-	 * Parses a player specification from an input String
-	 * @param l A single line String
-	 * @return A {@link Player} representing the state that was read from the input string.
-	 * @throws ParseException If the input can not be read
-	 */
+	@Override
 	public Player parsePlayerFromLine(String l) throws ParseException {
 		Matcher m = Pattern.compile("([A-Z]) ([a-zA-Z ]+)").matcher(l);
 
@@ -171,12 +150,7 @@ public class Parser {
 
 	// Moves
 
-	/**
-	 * Parses a move from an input String
-	 * @param l A single line String
-	 * @return The move matching the specified actions, if possible
-	 * @throws ParseException If the input can not be read
-	 */
+	@Override
 	public IMove parseMoveFromLine(String l) throws ParseException {
 		Matcher matcher;
 
@@ -195,13 +169,7 @@ public class Parser {
 		throw new ParseException("Invalid move", 2);
 	}
 
-	/**
-	 * Helper method to parse PlaceWallMoves
-	 * @param matcher A pattern matcher that matches the specification for a PlaceWallMove,
-	 *                   used to access the groups of the matcher input.
-	 * @return The specified PlaceWallMove
-	 * @throws ParseException If the input can not be read
-	 */
+	@Override
 	public PlaceWallMove parsePlaceWallMoveFromMatcher(Matcher matcher) throws ParseException {
 		Position pos1 = new Position(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
 		Position pos2 = new Position(Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));

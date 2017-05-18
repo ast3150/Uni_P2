@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class Driver implements IDriver {
-	static Parser parser = new Parser();
+	IParser parser;
 	Game game;
 
 	public static void main(String[] args) throws Exception {
@@ -16,7 +16,7 @@ public class Driver implements IDriver {
 		}
 
 		try {
-			game = parser.parseGameFromFile(configurationPath);
+			game = ServiceLocator.instance().getParser().parseGameFromFile(configurationPath);
 		} catch (Exception e) {
 			System.err.println("Configuration error: " + e.getMessage());
 			throw e;
@@ -29,6 +29,7 @@ public class Driver implements IDriver {
 	}
 
 	public Driver(Game game) throws InvalidMoveException {
+		this.parser = ServiceLocator.instance().getParser();
 		this.game = game;
 		game.setDriver(this);
 		game.start();
