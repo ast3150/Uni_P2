@@ -32,6 +32,7 @@ public class DriverTest {
 		//TODO makes the board silent but not the players
 		ServiceLocator test = new TestServiceLocator();
 		ServiceLocator.setServiceLocator(test);
+
 		Driver.main(args);
 		// then expectation should hold
 	}

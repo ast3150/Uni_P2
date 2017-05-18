@@ -47,10 +47,14 @@ public class RendererTest {
 
 		Game game = new Game(players, board);
 
-		//TODO silent machen aber test failt bei dieser Variante #anlizismen
-		Renderer renderer = new Renderer();
+		//set to testServiceLocator and get a silentRenderer
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+		IRenderer renderer;
+		renderer = ServiceLocator.instance().getRenderer();
 
 		// when
+
 		String renderedGame = renderer.render(game);
 
 		// then

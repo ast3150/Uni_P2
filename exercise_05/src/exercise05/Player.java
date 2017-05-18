@@ -3,7 +3,7 @@ package exercise05;
 /**
  * Represents a single player; holds the player's name, symbol. current position on the board and number of remaining wall moves.
  */
-public class Player {
+public class Player{
 	private String name;
 	private Character symbol;
 	private Position position;

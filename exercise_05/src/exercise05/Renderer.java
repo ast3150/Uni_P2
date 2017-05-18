@@ -1,10 +1,10 @@
 package exercise05;
+import java.io.PrintStream;
 
 /**
  * Renders a {@link Game} object.
  */
 public class Renderer implements IRenderer{
-
 	/**
 	 * Prints and returns the current state of a {@link Game}
 	 * @param game the game to be rendered
