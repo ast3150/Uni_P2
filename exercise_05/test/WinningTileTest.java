@@ -1,7 +1,5 @@
-import exercise05.PlaceWallMove;
-import exercise05.Player;
-import exercise05.Tile;
-import exercise05.WinningTile;
+import exercise05.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -11,6 +9,11 @@ import static org.junit.Assert.assertTrue;
  * Created by ast on 20.04.17.
  */
 public class WinningTileTest {
+	@Before
+	public void setup() {
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+	}
 
 	@Test
 	public void testEmptyWinningTileIsNotWinning() {

@@ -55,7 +55,7 @@ public class Game {
 	 */
 	public void end(Player winner) {
 		//TODO silent test
-		System.out.println("\n" + winner.toString() + " has won the game!");
+		ServiceLocator.instance().getPrintStream().println("\n" + winner.toString() + " has won the game!");
 		System.exit(0);
 	}
 
@@ -80,7 +80,7 @@ public class Game {
 		IMove move;
 
 		//TODO silent test
-		System.out.print(currentPlayer.toString() + ": ");
+		ServiceLocator.instance().getPrintStream().print(currentPlayer.toString() + ": ");
 
 		do {
 			move = driver.readNextMove(wasPreviousMoveInvalid);

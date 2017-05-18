@@ -2,6 +2,7 @@ import exercise05.Driver;
 import exercise05.IRenderer;
 import exercise05.ServiceLocator;
 import exercise05.TestServiceLocator;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
@@ -18,6 +19,12 @@ public class DriverTest {
 
 	@Rule
 	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
+	@Before
+	public void setup() {
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+	}
 
 	@Test
 	public void testDoesReturnOnMain() throws Exception {

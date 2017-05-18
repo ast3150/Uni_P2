@@ -1,12 +1,16 @@
-import exercise05.Player;
-import exercise05.Position;
-import exercise05.Tile;
+import exercise05.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TileTest {
+	@Before
+	public void setup() {
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+	}
 
 	@Test
 	public void testEqualTilesWithPlayers() {

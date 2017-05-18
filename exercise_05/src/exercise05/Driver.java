@@ -45,7 +45,7 @@ public class Driver implements IDriver {
 
 		try {
 			if (wasPreviousMoveInvalid) {
-				System.out.print("Invalid move. Try again: ");
+				ServiceLocator.instance().getPrintStream().print("Invalid move. Try again: ");
 			}
 
 			String input = readNextLine();

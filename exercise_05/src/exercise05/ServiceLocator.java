@@ -1,5 +1,7 @@
 package exercise05;
 
+import java.io.PrintStream;
+
 /**
  * Created by samuel on 16.05.17.
  */
@@ -26,5 +28,7 @@ public abstract class ServiceLocator {
     public abstract Game getGame();
 
     public abstract IRenderer getRenderer();
+
+    public abstract PrintStream getPrintStream();
     //...
 }

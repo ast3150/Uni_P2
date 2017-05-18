@@ -1,4 +1,5 @@
 import exercise05.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -6,6 +7,11 @@ import java.text.ParseException;
 import static org.junit.Assert.*;
 
 public class ParserTest {
+	@Before
+	public void setup() {
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+	}
 
   	@Test
 	public void testParsesBoardSizeFromLine() throws ParseException {

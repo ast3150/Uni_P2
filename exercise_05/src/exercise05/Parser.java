@@ -35,7 +35,7 @@ public class Parser {
 			stringFromFile = new String(readAllBytes(get(path)));
 		}
 		catch(FileNotFoundException e) {
-			System.out.println("Input file was not found: '" + path + "'");
+			ServiceLocator.instance().getPrintStream().println("Input file was not found: '" + path + "'");
 		}
 		catch(IOException e) {
 			e.printStackTrace();

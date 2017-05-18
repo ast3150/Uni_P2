@@ -1,10 +1,12 @@
 package exercise05;
+import javax.xml.ws.Service;
 import java.io.PrintStream;
 
 /**
  * Renders a {@link Game} object.
  */
 public class Renderer implements IRenderer{
+
 	/**
 	 * Prints and returns the current state of a {@link Game}
 	 * @param game the game to be rendered
@@ -13,10 +15,10 @@ public class Renderer implements IRenderer{
 	@Override
 	public String render(Game game) {
 		String s = "";
-		System.out.println();
+		ServiceLocator.instance().getPrintStream().println();
 
 		for (Tile[] row : game.getBoard()) {
-			System.out.println(convertToString(row));
+			ServiceLocator.instance().getPrintStream().println(convertToString(row));
 			s += convertToString(row) + "\n";
 		}
 

@@ -18,6 +18,12 @@ public class GameTest {
 	@Rule
 	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
+	@Before
+	public void setup() {
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+	}
+
 	@Test
 	public void testGamePassesTurnAfterValidMove() throws Exception {
 		// given

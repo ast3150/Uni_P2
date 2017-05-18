@@ -1,11 +1,16 @@
 package exercise05;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 /**
  * Created by samuel on 16.05.17.
  */
 public class TestServiceLocator extends ServiceLocator {
     Game game;
-    IRenderer renderer = new SilentRenderer();
+    IRenderer renderer = new Renderer();
 
     //TODO
     public Game getGame(){
@@ -14,5 +19,13 @@ public class TestServiceLocator extends ServiceLocator {
 
     public IRenderer getRenderer(){
         return renderer;
+    }
+
+    public PrintStream getPrintStream() {
+        try {
+            return new PrintStream(new FileOutputStream("/dev/null"));
+        } catch (Exception e) {
+            return System.out;
+        }
     }
 }

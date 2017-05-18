@@ -1,4 +1,5 @@
 import exercise05.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -6,6 +7,11 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 public class RendererTest {
+	@Before
+	public void setup() {
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+	}
 
 	@Test
 	public void testConvertToString() {
@@ -29,6 +35,7 @@ public class RendererTest {
 		assertEquals(expectedRow, renderedRow);
 	}
 
+
 	@Test
 	public void testRenderGame() {
 		// given
@@ -48,10 +55,7 @@ public class RendererTest {
 		Game game = new Game(players, board);
 
 		//set to testServiceLocator and get a silentRenderer
-		ServiceLocator test = new TestServiceLocator();
-		ServiceLocator.setServiceLocator(test);
-		IRenderer renderer;
-		renderer = ServiceLocator.instance().getRenderer();
+		IRenderer renderer = ServiceLocator.instance().getRenderer();
 
 		// when
 

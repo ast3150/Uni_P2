@@ -1,4 +1,5 @@
 import exercise05.*;
+import org.junit.Before;
 import org.junit.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -11,6 +12,12 @@ import static org.junit.Assert.*;
  * Created by ast on 06.04.17.
  */
 public class PlayerMoveTest {
+	@Before
+	public void setup() {
+		ServiceLocator test = new TestServiceLocator();
+		ServiceLocator.setServiceLocator(test);
+	}
+
 
 	@Test
 	public void testMoveToEmptyTileIsValid() {
