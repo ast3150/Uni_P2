@@ -20,7 +20,8 @@ public class IntegrationTests {
 	Book patterns = new Book(
 			"Design patterns : elements of reusable object-oriented software", // title
 			"Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides", // authors
-			40.2 // price
+			40.2, // price
+			2
 	);
 
 	@Test
@@ -30,12 +31,12 @@ public class IntegrationTests {
 		 */
 
 		Calendar orderDate = Calendar.getInstance();
-		orderDate.set(2017, 05, 16);
+		orderDate.set(2017, 04, 16);
 		BookOrder order = new BookOrder(
 				"Anonymous", // client name
 				orderDate // order date
 		);
-		order.addBook(patterns, 2);
+		order.addBook(patterns);
 
 		String expected = "Date: 16 May, 2017\n" +
 				"Client: Anonymous\n" +
@@ -43,10 +44,10 @@ public class IntegrationTests {
 				"Final Price: 80.4 CHF\n" +
 				"\n" +
 				"Books\n" +
-				"1.  Title: Design patterns : elements of reusable object-oriented software\n" +
-				"    Author(s): Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides\n" +
-				"    Price: 40.2 CHF\n" +
-				"    Quantity: 2";
+				"1.	Title: Design patterns : elements of reusable object-oriented software\n" +
+				"	Author(s): Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides\n" +
+				"	Price: 40.2 CHF\n" +
+				"	Quantity: 2";
 
 		assertEquals(expected, order.summary());
 	}
@@ -68,8 +69,13 @@ public class IntegrationTests {
 		// order in an extra step
 		Batch emptyBatch = order.newBatch("Empty batch");
 		Batch patternsBatch = order.newBatch("Design Patterns");
+		Batch someotherBatch = new Batch("whatthedamn?");
 
-		patternsBatch.addBook(patterns, 3);
+		patternsBatch.addBook(patterns);
+		patternsBatch.addBatch(someotherBatch);
+
+		someotherBatch.addBook(patterns);
+
 
 		String expected = "Date: 16 May, 2017\n" +
 				"Client: Anonymous\n" +
@@ -91,6 +97,7 @@ public class IntegrationTests {
 				"    Price: 40.2 CHF\n" +
 				"    Quantity: 1";
 
+		System.out.println(order.details());
 		assertEquals(expected, order.details());
 	}
 }
