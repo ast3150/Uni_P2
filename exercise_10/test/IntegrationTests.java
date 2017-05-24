@@ -23,7 +23,6 @@ public class IntegrationTests {
 			40.2 // price
 	);
 
-
 	@Test
 	public void singleBookSummary() {
 		/*
